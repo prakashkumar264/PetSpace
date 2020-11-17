@@ -1,0 +1,26 @@
+<android.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:titleTextColor="@android:color/black"
+    app:subtitleTextColor="@android:color/black"
+    android:elevation="5dp"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        >
+<ImageButton
+    android:layout_alignParentEnd="true"
+    android:id="@+id/notifications"
+    android:layout_width="20dp"
+    android:layout_height= "20dp"
+    android:layout_marginEnd="15dp"
+ />
+    </RelativeLayout>
+</android.widget.Toolbar>

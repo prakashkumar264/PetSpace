@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">PetSpace</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="title_activity_update_password">UpdatePassword</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="email_hint">email_hint</string>
+    <string name="get_password_link">get_password_link</string>
+    <string name="back">back</string>
+    <string name="update_pass">update_pass</string>
+    <string name="logout">logout</string>
+    <string name="password_hint">password_hint</string>
+    <string name="new_password">new_password</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="button">Button</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="register">Register!</string>
+    <string name="or_login_with">Or login with</string>
+    <string name="todo">TODO</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="update_password">Update Password</string>
+    <string name="enter_a_valid_e_mail_address">Enter a valid e-mail address.</string>
+    <string name="enter_a_valid_password">Enter a valid password.</string>
+    <string name="enter_a_new_password">Enter a New Password</string>
+    <string name="or">OR</string>
+    <string name="petspace_home">PetSpace Home</string>
+    <string name="reset_password">RESET PASSWORD</string>
+    <string name="edit">edit</string>
+    <string name="delete">del</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
+    <string name="logoutappp">LOGOUT</string>
+
+</resources>

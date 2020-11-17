@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "524195562722",
+    "firebase_url": "https://petspace-2c47c.firebaseio.com",
+    "project_id": "petspace-2c47c",
+    "storage_bucket": "petspace-2c47c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524195562722:android:bd0437ed86aa2f3fc7cabb",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.petspace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524195562722-agvfdor5jas9vifi4tk4er29egotkn2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATcnpntCzSCdfrw1oI9ZD2RlX_TJ3aKSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524195562722-agvfdor5jas9vifi4tk4er29egotkn2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
