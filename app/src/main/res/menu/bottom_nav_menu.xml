@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/Search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Find Pet Friends" />
+
+    <item
+        android:id="@+id/Chat"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="Chat" />
+
+    <item
+        android:id="@+id/Profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/Settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="Settings" />
+
+</menu>

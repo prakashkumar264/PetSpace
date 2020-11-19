@@ -63,7 +63,7 @@
         </LinearLayout>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/main_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/petspace_home"
@@ -79,12 +79,40 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginBottom="3dp"
-        app:menu="@menu/navigation_menu">
+        app:menu="@menu/bottom_nav_menu">
 
     </com.google.android.material.navigation.NavigationView>
 
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomAppBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:fabCradleMargin="15dp"
+            app:fabCradleRoundedCornerRadius="15dp"
+            app:fabCradleVerticalOffset="15dp">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="410dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@color/purple_700"
+                app:itemIconTint="@color/white"
+                app:itemTextColor="#FFFFFF"
+                app:menu="@menu/bottom_nav_menu" />
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
+
+
 
