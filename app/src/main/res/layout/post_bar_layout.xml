@@ -25,7 +25,7 @@
                 android:id="@+id/text_post"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="What's in your mind?"
+                android:hint="Whats on your mind?"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:inputType="textMultiLine"
