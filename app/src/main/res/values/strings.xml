@@ -10,12 +10,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_main">MainActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
@@ -27,7 +23,6 @@
     <string name="get_password_link">get_password_link</string>
     <string name="back">back</string>
     <string name="update_pass">update_pass</string>
-    <string name="logout">logout</string>
     <string name="password_hint">password_hint</string>
     <string name="new_password">new_password</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
@@ -43,12 +38,12 @@
     <string name="enter_a_new_password">Enter a New Password</string>
     <string name="or">OR</string>
     <string name="petspace_home">PetSpace Home</string>
-    <string name="reset_password">RESET PASSWORD</string>
+    <string name="reset_password">Reset Password</string>
     <string name="edit">edit</string>
     <string name="delete">del</string>
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
-    <string name="logoutappp">LOGOUT</string>
+    <string name="logout">Log Out</string>
     <string name="home">Home</string>
     <string name="chat">Chat</string>
     <string name="profile">Profile</string>
@@ -57,5 +52,8 @@
     <string name="todo">TODO</string>
     <string name="none">none</string>
     <string name="find_pet_friends">Find Pet Friends</string>
+    <string name="messages">Messages</string>
+    <string name="find_pets">Find Pets</string>
+    <string name="new_post">New Post</string>
 
 </resources>

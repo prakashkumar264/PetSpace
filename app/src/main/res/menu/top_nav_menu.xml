@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/Search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/find_pets" />
+
+    <item
+        android:id="@+id/New_Post"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/new_post" />
+
+    <item
+        android:id="@+id/Chat"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="@string/chat" />
+
+    <item
+        android:id="@+id/Messages"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/messages" />
+
+    <item
+        android:id="@+id/Profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/profile" />
+
+    <item
+        android:id="@+id/Settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/settings" />
+
+    <item
+        android:id="@+id/Reset_Password"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/reset_password" />
+
+    <item
+        android:id="@+id/Logout"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/logout" />
+
+</menu>
