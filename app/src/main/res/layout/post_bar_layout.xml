@@ -25,7 +25,7 @@
                 android:id="@+id/text_post"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Whats on your mind?"
+                android:hint="What's on your mind?"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:inputType="textMultiLine"
@@ -45,6 +45,8 @@
                 android:id="@+id/add_new_upload_button"
                 android:layout_width="25dp"
                 android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/postpicture"
                 android:layout_marginRight="15dp"
                 android:scaleType="fitCenter"
                 android:background="@android:color/white"
@@ -59,6 +61,7 @@
                 android:layout_width="25dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:src="@drawable/posting"
                 android:layout_marginRight="15dp"
                 android:scaleType="fitCenter"
                 android:background="@android:color/white"
@@ -68,7 +71,6 @@
                 >
             </ImageButton>
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 
