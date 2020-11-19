@@ -96,16 +96,18 @@
             android:layout_gravity="bottom"
             app:fabCradleMargin="15dp"
             app:fabCradleRoundedCornerRadius="15dp"
-            app:fabCradleVerticalOffset="15dp">
+            app:fabCradleVerticalOffset="15dp"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="#FFFFFF">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
-                android:layout_width="410dp"
+                android:layout_width="412dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@color/purple_700"
                 app:itemIconTint="@color/white"
-                app:itemTextColor="#FFFFFF"
+                app:itemTextColor="@color/white"
                 app:menu="@menu/bottom_nav_menu" />
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

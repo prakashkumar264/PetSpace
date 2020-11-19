@@ -41,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.Chat:
-                        Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.home:
                         Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.Search:
-                        Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Find Pets", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.Chat:
+                        Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.Profile:
                         Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();

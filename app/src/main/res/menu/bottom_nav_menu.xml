@@ -8,7 +8,7 @@
     <item
         android:id="@+id/Search"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="Find Pet Friends" />
+        android:title="Find Pets" />
 
     <item
         android:id="@+id/Chat"
