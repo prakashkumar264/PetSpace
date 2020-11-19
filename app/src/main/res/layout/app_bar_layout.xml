@@ -8,19 +8,16 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:titleTextColor="@android:color/black"
     app:subtitleTextColor="@android:color/black"
-    android:elevation="5dp"
-    >
+    android:elevation="5dp">
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        >
-<ImageButton
-    android:layout_alignParentEnd="true"
-    android:id="@+id/notifications"
-    android:layout_width="20dp"
-    android:layout_height= "20dp"
-    android:layout_marginEnd="15dp"
- />
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_alignParentEnd="true"
+            android:id="@+id/notifications"
+            android:layout_width="20dp"
+            android:layout_height= "20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ic_notifications"/>
     </RelativeLayout>
 </android.widget.Toolbar>

@@ -3,7 +3,7 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/Search"
@@ -13,16 +13,16 @@
     <item
         android:id="@+id/Chat"
         android:icon="@drawable/ic_baseline_chat_24"
-        android:title="Chat" />
+        android:title="@string/chat" />
 
     <item
         android:id="@+id/Profile"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile" />
+        android:title="@string/profile" />
 
     <item
         android:id="@+id/Settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Settings" />
+        android:title="@string/settings" />
 
 </menu>

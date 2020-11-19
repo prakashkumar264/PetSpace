@@ -21,28 +21,12 @@
 
 
         <include
-            android:layout_alignParentBottom="true"
             android:id="@+id/post_bar_included"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             layout="@layout/post_bar_layout"
-            >
-        </include>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"></include>
 
-
-        <Button
-            android:id="@+id/forgot_pass_btn"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/main_page_toolbar"
-            android:text="@string/reset_password" />
-
-        <Button
-            android:id="@+id/logout_btn"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_above="@id/post_bar_included"
-            android:text="@string/logoutappp" />
 
         <LinearLayout
             android:id="@+id/main_container"
@@ -62,15 +46,6 @@
 
         </LinearLayout>
 
-            <TextView
-                android:id="@+id/main_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/petspace_home"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -98,7 +73,7 @@
             app:fabCradleRoundedCornerRadius="15dp"
             app:fabCradleVerticalOffset="15dp"
             app:itemIconTint="@color/white"
-            app:itemTextColor="#FFFFFF">
+            app:itemTextColor="@color/white">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
@@ -108,6 +83,7 @@
                 android:background="@color/purple_700"
                 app:itemIconTint="@color/white"
                 app:itemTextColor="@color/white"
+                app:labelVisibilityMode="labeled"
                 app:menu="@menu/bottom_nav_menu" />
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

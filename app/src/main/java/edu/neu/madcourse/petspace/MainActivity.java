@@ -62,25 +62,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        logout_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                mAuth.signOut();
-                startActivity(intent);
-            }
-        });
-        forgot_pass_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
-                    startActivity(intent);
-                }
-        });
+//        logout_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                mAuth.signOut();
+//                startActivity(intent);
+//            }
+//        });
+//        forgot_pass_btn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+//                    startActivity(intent);
+//                }
+//        });
     }
 
     private void initializeViews() {
-        forgot_pass_btn = findViewById(R.id.forgot_pass_btn);
-        logout_btn = findViewById(R.id.logout_btn);
+//        forgot_pass_btn = findViewById(R.id.forgot_pass_btn);
+//        logout_btn = findViewById(R.id.logout_btn);
     }
 }
