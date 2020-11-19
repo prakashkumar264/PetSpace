@@ -1,15 +1,17 @@
 package edu.neu.madcourse.petspace;
 
+import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
+import edu.neu.madcourse.petspace.ui.login.LoginActivity;
 import android.content.Intent;
 import android.os.Bundle;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
 import android.view.View;
@@ -18,17 +20,16 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
-import edu.neu.madcourse.petspace.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button forgot_pass_btn, logout_btn;
+//    Button forgot_pass_btn, logout_btn;
     private FirebaseAuth mAuth;
     private View post_bar;
     private Toolbar mToolbar;
     private DatabaseReference UserRef, PostRef, LikesRef, CommentRef;
     private String CurrentUserId;
+    private RecyclerView postList;
     View view;
 
     @Override
@@ -63,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
 
-
-
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -88,7 +86,21 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        //Instantiate RecyclerView
+        postList = findViewById(R.id.all_users_post_list);
+        postList.setHasFixedSize(true);
+        //Reserve Items
+        postList.setItemViewCacheSize(20);
+        postList.setDrawingCacheEnabled(true);
+        postList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
+        // Add Linear Layout Manager
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        postList.setLayoutManager(linearLayoutManager);
 
+
+    }
 
 //        logout_btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -105,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 //                    startActivity(intent);
 //                }
 //        });
-    }
+
 
     private void initializeViews() {
 //        forgot_pass_btn = findViewById(R.id.forgot_pass_btn);
