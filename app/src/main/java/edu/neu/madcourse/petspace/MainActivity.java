@@ -2,7 +2,6 @@ package edu.neu.madcourse.petspace;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         // Display post bar upon loading.
         post_bar = new View(this);
-        post_bar.findViewById(R.id.post_bar_included);
+        post_bar.findViewById(R.id.bottom_post_bar);
 
         //instantiate Objects
         mAuth = FirebaseAuth.getInstance();
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
 //        getSupportActionBar().setTitle("PetSpace");
 
-        view = findViewById(R.id.post_bar_included);
+        view = findViewById(R.id.bottom_post_bar);
 
         // Set actionbar with toolbar
         setSupportActionBar(mToolbar);
