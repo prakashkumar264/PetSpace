@@ -12,12 +12,13 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <ImageButton
-            android:layout_alignParentEnd="true"
             android:id="@+id/notifications"
             android:layout_width="20dp"
-            android:layout_height= "20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/ic_notifications"/>
+            android:background="@drawable/ic_baseline_notifications_24" />
     </RelativeLayout>
 </android.widget.Toolbar>

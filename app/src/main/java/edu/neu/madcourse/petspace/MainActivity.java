@@ -2,7 +2,11 @@ package edu.neu.madcourse.petspace;
 
 import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
 import edu.neu.madcourse.petspace.ui.login.LoginActivity;
+
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,13 +21,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 
 public class MainActivity extends AppCompatActivity {
 
-//    Button forgot_pass_btn, logout_btn;
+    //    Button forgot_pass_btn, logout_btn;
     private FirebaseAuth mAuth;
     private View post_bar;
     private Toolbar mToolbar;
@@ -31,13 +36,35 @@ public class MainActivity extends AppCompatActivity {
     private String CurrentUserId;
     private RecyclerView postList;
     View view;
+    private Context mContext;
+    private Activity mActivity;
+    private RelativeLayout mRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get the application context
+        mContext = getApplicationContext();
+
+        // Get the activity
+        mActivity = MainActivity.this;
+
+        // Get the widgets reference from XML layout
+        mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+
+        // Set a title for toolbar
+        mToolbar.setTitle("Android SubMenu Example");
+        //mToolbar.setTitleTextColor(Color.WHITE);
+
+        // Set support actionbar with toolbar
+        setActionBar(mToolbar);
+
+        // Change the toolbar background color
+        mToolbar.setBackgroundColor(Color.parseColor("#FF3700B3"));
+
         mAuth = FirebaseAuth.getInstance();
-        initializeViews();
         // Display post bar upon loading.
         post_bar = new View(this);
         post_bar.findViewById(R.id.post_bar_included);
@@ -64,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
 
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -85,42 +113,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
+
         });
-        //Instantiate RecyclerView
-        postList = findViewById(R.id.all_users_post_list);
-        postList.setHasFixedSize(true);
-        //Reserve Items
-        postList.setItemViewCacheSize(20);
-        postList.setDrawingCacheEnabled(true);
-        postList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
-        // Add Linear Layout Manager
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        postList.setLayoutManager(linearLayoutManager);
+
+
 
 
     }
 
-//        logout_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                mAuth.signOut();
-//                startActivity(intent);
-//            }
-//        });
-//        forgot_pass_btn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
-//                    startActivity(intent);
-//                }
-//        });
 
-
-    private void initializeViews() {
-//        forgot_pass_btn = findViewById(R.id.forgot_pass_btn);
-//        logout_btn = findViewById(R.id.logout_btn);
-    }
 }
