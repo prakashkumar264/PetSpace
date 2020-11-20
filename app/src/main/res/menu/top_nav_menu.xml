@@ -2,72 +2,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/text_color"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_reorder_24"
+        android:menuCategory="container"
         android:orderInCategory="1"
         android:title="@string/main_menu"
+        android:visible="true"
         app:showAsAction="always">
-    <menu>
-        <item
-            android:id="@+id/home"
-            android:orderInCategory="1"
-            android:icon="@drawable/home_black"
-            app:showAsAction="never"
-            android:title="@string/home" />
+        <menu>
+            <item
+                android:id="@+id/home"
+                android:icon="@drawable/home_black"
+                android:orderInCategory="1"
+                android:title="@string/home"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/Search"
-        android:orderInCategory="2"
-        android:icon="@drawable/search_black"
-        app:showAsAction="never"
-        android:title="@string/find_pets" />
+            <item
+                android:id="@+id/Search"
+                android:icon="@drawable/search_black"
+                android:orderInCategory="2"
+                android:title="@string/find_pets"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/New_Post"
-        android:orderInCategory="3"
-        android:icon="@drawable/ic_baseline_post_add_24"
-        app:showAsAction="never"
-        android:title="@string/new_post" />
+            <item
+                android:id="@+id/New_Post"
+                android:icon="@drawable/ic_baseline_post_add_24"
+                android:orderInCategory="3"
+                android:title="@string/new_post"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/Chat"
-        android:orderInCategory="4"
-        android:icon="@drawable/ic_baseline_chat_24"
-        app:showAsAction="never"
-        android:title="@string/chat" />
+            <item
+                android:id="@+id/Chat"
+                android:icon="@drawable/ic_baseline_chat_24"
+                android:orderInCategory="4"
+                android:title="@string/chat"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/Messages"
-        android:orderInCategory="5"
-        android:icon="@drawable/ic_baseline_search_24"
-        app:showAsAction="never"
-        android:title="@string/messages" />
+            <item
+                android:id="@+id/Messages"
+                android:icon="@drawable/ic_baseline_search_24"
+                android:orderInCategory="5"
+                android:title="@string/messages"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/Profile"
-        android:orderInCategory="6"
-        android:icon="@drawable/ic_baseline_person_24"
-        app:showAsAction="never"
-        android:title="@string/profile" />
+            <item
+                android:id="@+id/Profile"
+                android:icon="@drawable/ic_baseline_person_24"
+                android:orderInCategory="6"
+                android:title="@string/profile"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/Settings"
-        android:orderInCategory="7"
-        android:icon="@drawable/ic_baseline_settings_24"
-        app:showAsAction="never"
-        android:title="@string/settings" />
+            <item
+                android:id="@+id/Settings"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:orderInCategory="7"
+                android:title="@string/settings"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/Reset_Password"
-        android:orderInCategory="8"
-        android:icon="@drawable/ic_baseline_settings_24"
-        app:showAsAction="never"
-        android:title="@string/reset_password" />
+            <item
+                android:id="@+id/Reset_Password"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:orderInCategory="8"
+                android:title="@string/reset_password"
+                app:showAsAction="never" />
 
-    <item
-        android:id="@+id/Logout"
-        android:orderInCategory="9"
-        android:icon="@drawable/ic_baseline_settings_24"
-        app:showAsAction="never"
-        android:title="@string/logout" /></menu>
-</item>
+            <item
+                android:id="@+id/Logout"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:orderInCategory="9"
+                android:title="@string/logout"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>

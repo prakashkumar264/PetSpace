@@ -17,13 +17,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    //    Button forgot_pass_btn, logout_btn;
     private FirebaseAuth mAuth;
     private View post_bar;
     private Toolbar mToolbar;
@@ -53,13 +53,6 @@ public class MainActivity extends AppCompatActivity {
 //        mToolbar.setTitle("PetSpace");
         //mToolbar.setTitleTextColor(Color.WHITE);
 
-        // Set actionbar with toolbar
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        // Change the toolbar background color
-        mToolbar.setBackgroundColor(Color.parseColor("#FF3700B3"));
-
         mAuth = FirebaseAuth.getInstance();
         // Display post bar upon loading.
         post_bar = new View(this);
@@ -75,10 +68,17 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
 
+        ImageButton notifications_img_btn = (ImageButton) findViewById(R.id.notifications_image_bttn);
+
 //        getSupportActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
 //        getSupportActionBar().setTitle("PetSpace");
 
         view = findViewById(R.id.post_bar_included);
+
+        // Set actionbar with toolbar
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("");
 
         // Hide keyboard upon loading main screen.
         getWindow().setSoftInputMode(
@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         // Display bottom navigation bar upon loading.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -115,17 +114,31 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        // handle top nav notifications click event
+        notifications_img_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(MainActivity.this, "Notifications", Toast.LENGTH_SHORT).show();
+
+                // test code
+                // change notifications image - alert that notifications are pending
+                notifications_img_btn.setImageResource(R.drawable.ic_baseline_notifications_active_24);
+
+                }
+
+        });
     }
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.top_nav_menu, menu);
-            return true;
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_nav_menu, menu);
+        return true;
+    }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
                 Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
@@ -167,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-        return false;
+        return true;
     }
 
 

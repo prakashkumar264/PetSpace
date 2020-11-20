@@ -18,19 +18,22 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
+            android:background="#FF3700B3"
+            android:clickable="true"
             android:hapticFeedbackEnabled="false"
             android:requiresFadingEdge="horizontal"
-            android:theme="@style/Widget.AppCompat.ListPopupWindow"
+            android:theme="@style/Widget.AppCompat.Light.PopupMenu"
             app:popupTheme="@style/Widget.AppCompat.PopupMenu"
             app:titleTextColor="#090909" />
 
 
         <include
             android:id="@+id/main_page_toolbar"
-            layout="@layout/app_bar_layout">
-        </include>
+            layout="@layout/app_bar_layout"
+            android:layerType="software"
+            android:layoutMode="clipBounds"
+            android:visibility="visible"
+            app:menu="@menu/top_nav_menu"></include>
 
 
 

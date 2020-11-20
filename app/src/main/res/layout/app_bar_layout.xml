@@ -4,20 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="5dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:subtitleTextColor="@android:color/black"
-    app:titleTextColor="@android:color/black">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/notifications"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/ic_baseline_notifications_24" />
+            android:id="@+id/notifications_image_bttn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_baseline_notifications_24" />
     </RelativeLayout>
 </androidx.appcompat.widget.Toolbar>
