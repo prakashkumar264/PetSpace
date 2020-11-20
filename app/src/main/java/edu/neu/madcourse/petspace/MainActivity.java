@@ -50,11 +50,12 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         // Set a title for toolbar
-        mToolbar.setTitle("PetSpace");
+//        mToolbar.setTitle("PetSpace");
         //mToolbar.setTitleTextColor(Color.WHITE);
 
         // Set actionbar with toolbar
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Change the toolbar background color
         mToolbar.setBackgroundColor(Color.parseColor("#FF3700B3"));
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
+
 //        getSupportActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
 //        getSupportActionBar().setTitle("PetSpace");
 
