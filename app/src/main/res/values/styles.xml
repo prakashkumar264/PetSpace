@@ -25,5 +25,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="top_nav_menu_style" parent="AppTheme">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
 
 </resources>

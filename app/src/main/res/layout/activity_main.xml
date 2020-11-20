@@ -22,9 +22,9 @@
             android:clickable="true"
             android:hapticFeedbackEnabled="false"
             android:requiresFadingEdge="horizontal"
-            android:theme="@style/Widget.AppCompat.Light.PopupMenu"
-            app:popupTheme="@style/Widget.AppCompat.PopupMenu"
-            app:titleTextColor="#090909" />
+            android:theme="@style/Widget.AppCompat.Light.PopupMenu.Overflow"
+            app:popupTheme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            app:titleTextColor="#000000" />
 
 
         <include
