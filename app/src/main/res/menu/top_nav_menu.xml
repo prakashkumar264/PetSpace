@@ -4,7 +4,7 @@
         android:id="@+id/main_popup_menu"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_reorder_24"
-        android:menuCategory="container"
+        android:menuCategory="system"
         android:orderInCategory="1"
         android:title="@string/main_menu"
         android:visible="true"
@@ -13,10 +13,11 @@
         <menu>
             <item
                 android:id="@+id/home"
+                android:enabled="true"
                 android:icon="@drawable/home_black"
+                android:iconTint="#651FFF"
                 android:orderInCategory="1"
-                android:title="@string/home"
-                app:showAsAction="never" />
+                android:title="@string/home" />
 
             <item
                 android:id="@+id/Search"

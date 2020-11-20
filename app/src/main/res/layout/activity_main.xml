@@ -20,12 +20,14 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#FF3700B3"
             android:clickable="true"
+            android:elevation="5dp"
             android:hapticFeedbackEnabled="false"
             android:requiresFadingEdge="horizontal"
-            android:theme="@style/Widget.AppCompat.Light.PopupMenu.Overflow"
-            app:popupTheme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:visibility="visible"
+            app:menu="@menu/top_nav_menu"
+            app:popupTheme="@style/TextAppearance.AppCompat.Widget.DropDownItem"
             app:titleTextColor="#000000" />
-
 
         <include
             android:id="@+id/main_page_toolbar"
