@@ -1,11 +1,7 @@
 package edu.neu.madcourse.petspace;
 
-import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
-import edu.neu.madcourse.petspace.ui.login.LoginActivity;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,16 +10,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         mActivity = MainActivity.this;
 
         // Get the widgets reference from XML layout
-        mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         // Set a title for toolbar
-        mToolbar.setTitle("Android SubMenu Example");
+        mToolbar.setTitle("PetSpace");
         //mToolbar.setTitleTextColor(Color.WHITE);
 
-        // Set support actionbar with toolbar
-        setActionBar(mToolbar);
+        // Set actionbar with toolbar
+        setSupportActionBar(mToolbar);
 
         // Change the toolbar background color
         mToolbar.setBackgroundColor(Color.parseColor("#FF3700B3"));
@@ -77,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
 
         mToolbar = findViewById(R.id.main_page_toolbar);
-        setActionBar(mToolbar);
-        getActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
-        getActionBar().setTitle("PetSpace");
+        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
+//        getSupportActionBar().setTitle("PetSpace");
 
         view = findViewById(R.id.post_bar_included);
 
@@ -89,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         // Display bottom navigation bar upon loading.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
 
 
             @Override
@@ -113,13 +107,56 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
-
         });
-
-
-
-
     }
+
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.top_nav_menu, menu);
+            return true;
+        }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home:
+
+                return true;
+            case R.id.Search:
+
+                return true;
+            case R.id.New_Post:
+
+                return true;
+            case R.id.Chat:
+
+                return true;
+            case R.id.Messages:
+
+                return true;
+            case R.id.Profile:
+
+                return true;
+
+            case R.id.Settings:
+
+                return true;
+
+            case R.id.Reset_Password:
+
+                return true;
+
+            case R.id.Logout:
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 
 }

@@ -4,7 +4,9 @@
         <!-- Customize theme here. -->
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="drawerArrowStyle">@style/DrawerIcon</item>
-
+        <item name="colorPrimary">@color/cardview_dark_background</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorAccent">@color/design_default_color_surface</item>
     </style>
 
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">

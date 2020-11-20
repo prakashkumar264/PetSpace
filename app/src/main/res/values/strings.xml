@@ -54,5 +54,6 @@
     <string name="messages">Messages</string>
     <string name="find_pets">Find Pets</string>
     <string name="new_post">New Post</string>
+    <string name="text_color">Text Color</string>
 
 </resources>
