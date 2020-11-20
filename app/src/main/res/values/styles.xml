@@ -1,12 +1,18 @@
 <resources>
     <!-- Application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize theme here. -->
-        <item name="android:popupMenuStyle">@style/PopupMenu</item>
-        <item name="drawerArrowStyle">@style/DrawerIcon</item>
-        <item name="colorPrimary">@color/cardview_dark_background</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/design_default_color_primary</item>
         <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
-        <item name="colorAccent">@color/design_default_color_surface</item>
+        <item name="colorAccent">@color/design_default_color_secondary</item>
+        <item name="android:textColor">#ff000f</item>
+    </style>
+
+    <style name="CustomTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
+        <item name="android:actionMenuTextAppearance">@style/MyActionBarMenu</item>
+        <item name="android:actionMenuTextColor">@color/design_default_color_on_secondary</item>
+        <item name="android:spinnerItemStyle">@style/MySpinnerItem</item>
     </style>
 
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -29,16 +35,42 @@
     <style name="PopupMenu" parent="@android:style/Widget.Material.Light.PopupWindow">
 
         <item name="android:popupTheme">@style/Widget.AppCompat.Light.PopupMenu</item>
-        <item name="android:popupBackground">#FFFFFF</item>
+        <item name="android:popupBackground">#040303</item>
+        <item name="colorOnPrimary">#000</item>
         <item name="android:textSize">12sp</item>
         <item name="android:popupElevation">5dp</item>
+        <item name="android:textColor">@color/cardview_dark_background</item>
     </style>
 
         <style name="Theme.Fab_Bottom_app_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
             <item name="colorPrimary">#0F9D58</item>
             <item name="colorPrimaryVariant">#0F9D58</item>
             <item name="colorOnPrimary">#000</item>
+            <item name="android:textColor">@color/cardview_dark_background</item>
         </style>
 
+    <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/white</item>
+        <item name="android:titleTextStyle">@style/MyActionBarTitle</item>
+        <item name="android:textColor">@color/cardview_dark_background</item>
+    </style>
+
+    <style name="MyActionBarTitle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/cardview_dark_background</item>
+    </style>
+
+    <style name="MyActionBarMenu" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/design_default_color_primary</item>
+    </style>
+
+    <style name="MySpinnerItem" parent="@android:style/Widget.Holo.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/MyTextAppearance</item>
+    </style>
+
+    <style name="MyTextAppearance" parent="@android:style/TextAppearance.Holo.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/design_default_color_primary</item>
+    </style>
 
 </resources>

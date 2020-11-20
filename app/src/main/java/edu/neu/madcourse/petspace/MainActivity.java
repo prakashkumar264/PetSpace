@@ -93,25 +93,29 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.home:
                         Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+
                         break;
                     case R.id.Search:
                         Toast.makeText(MainActivity.this, "Find Pets", Toast.LENGTH_SHORT).show();
+
                         break;
                     case R.id.Chat:
                         Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
+
                         break;
                     case R.id.Profile:
                         Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+
                         break;
                     case R.id.Settings:
                         Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+
                         break;
                 }
                 return true;
             }
         });
     }
-
 
         @Override
         public boolean onCreateOptionsMenu(Menu menu){
@@ -124,39 +128,46 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected (MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
+                Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
 
-                return true;
+                break;
+
             case R.id.Search:
+                Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
 
-                return true;
+                break;
             case R.id.New_Post:
+                Toast.makeText(MainActivity.this, "New Post", Toast.LENGTH_SHORT).show();
 
-                return true;
+                break;
             case R.id.Chat:
+                Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
 
-                return true;
+                break;
             case R.id.Messages:
+                Toast.makeText(MainActivity.this, "Messages", Toast.LENGTH_SHORT).show();
 
-                return true;
+                break;
             case R.id.Profile:
+                Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
 
-                return true;
-
+                break;
             case R.id.Settings:
+                Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
 
-                return true;
-
+                break;
             case R.id.Reset_Password:
+                Toast.makeText(MainActivity.this, "Reset Password", Toast.LENGTH_SHORT).show();
 
-                return true;
-
+                break;
             case R.id.Logout:
+                Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
 
-                return true;
-
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return false;
     }
 
 

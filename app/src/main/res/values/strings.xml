@@ -55,5 +55,7 @@
     <string name="find_pets">Find Pets</string>
     <string name="new_post">New Post</string>
     <string name="text_color">Text Color</string>
+    <string name="mainmenu">main_menu</string>
+    <string name="main_menu">main_menu_nav</string>
 
 </resources>

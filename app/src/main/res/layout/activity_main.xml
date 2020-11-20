@@ -20,9 +20,11 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:navigationIcon="@drawable/ic_baseline_reorder_24"
-            app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:hapticFeedbackEnabled="false"
+            android:requiresFadingEdge="horizontal"
+            android:theme="@style/Widget.AppCompat.ListPopupWindow"
+            app:popupTheme="@style/Widget.AppCompat.PopupMenu"
+            app:titleTextColor="#090909" />
 
 
         <include
