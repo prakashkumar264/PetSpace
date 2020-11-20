@@ -35,14 +35,14 @@
 
             <item
                 android:id="@+id/Chat"
-                android:icon="@drawable/ic_baseline_chat_24"
+                android:icon="@drawable/ic_baseline_chat_bubble_outline_24"
                 android:orderInCategory="4"
                 android:title="@string/chat"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/Messages"
-                android:icon="@drawable/ic_baseline_search_24"
+                android:icon="@drawable/ic_baseline_chat_24"
                 android:orderInCategory="5"
                 android:title="@string/messages"
                 app:showAsAction="never" />
@@ -63,14 +63,14 @@
 
             <item
                 android:id="@+id/Reset_Password"
-                android:icon="@drawable/ic_baseline_settings_24"
+                android:icon="@drawable/ic_baseline_refresh_24"
                 android:orderInCategory="8"
                 android:title="@string/reset_password"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/Logout"
-                android:icon="@drawable/ic_baseline_settings_24"
+                android:icon="@drawable/ic_baseline_logout_24"
                 android:orderInCategory="9"
                 android:title="@string/logout"
                 app:showAsAction="never" />

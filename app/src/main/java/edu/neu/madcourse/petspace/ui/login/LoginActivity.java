@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {   SendUserToMainActivity();
-                                Toast.makeText(LoginActivity.this,"Login Successful! Welcome to PetSpace!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this,"Login Successful. Welcome to PetSpace!",Toast.LENGTH_LONG).show();
                                 progressBar.invalidate();
                             }
                             else {
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();
 
     }
-    //Method to redirect User to Forgot Password Activity....
+    //Method to redirect User to Forgot Password Activity.
     private void SendUserToForgotPasswordActivity() {
 
         Intent forgotIntent =new Intent(LoginActivity.this, ForgotPasswordActivity.class);

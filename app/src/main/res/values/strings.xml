@@ -38,7 +38,6 @@
     <string name="enter_a_new_password">Enter a New Password</string>
     <string name="or">OR</string>
     <string name="petspace_home">PetSpace Home</string>
-    <string name="reset_password">Reset Password</string>
     <string name="edit">edit</string>
     <string name="delete">del</string>
     <string name="drawer_open">drawer_open</string>
@@ -57,5 +56,11 @@
     <string name="text_color">Text Color</string>
     <string name="mainmenu">main_menu</string>
     <string name="main_menu">main_menu_nav</string>
-
+    <string name="enter_the_e_mail_address_associated_with_your_account">Enter the e-mail address associated with your account.</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="cancel">CANCEL</string>
+    <string name="email_address">Email Address</string>
+    <string name="enter_e_mail_address">Enter E-Mail Address</string>
+    <string name="enter_password">Enter Password</string>
 </resources>

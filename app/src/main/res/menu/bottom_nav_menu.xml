@@ -12,13 +12,13 @@
 
     <item
         android:id="@+id/Chat"
-        android:icon="@drawable/ic_baseline_chat_24"
+        android:icon="@drawable/ic_baseline_chat_bubble_outline_24"
         android:title="@string/chat" />
 
     <item
-        android:id="@+id/Profile"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="@string/profile" />
+        android:id="@+id/Messages"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="@string/messages" />
 
     <item
         android:id="@+id/Settings"

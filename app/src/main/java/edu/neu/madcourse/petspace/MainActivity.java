@@ -1,7 +1,9 @@
 package edu.neu.madcourse.petspace;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,8 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
+import edu.neu.madcourse.petspace.ui.login.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,8 +57,12 @@ public class MainActivity extends AppCompatActivity {
         // Set a title for toolbar
 //        mToolbar.setTitle("PetSpace");
         //mToolbar.setTitleTextColor(Color.WHITE);
+//        getSupportActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
+//        getSupportActionBar().setTitle("PetSpace");
 
+        // firebase Instance
         mAuth = FirebaseAuth.getInstance();
+
         // Display post bar upon loading.
         post_bar = new View(this);
         post_bar.findViewById(R.id.bottom_post_bar);
@@ -63,15 +73,12 @@ public class MainActivity extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
-
+        // Menu toolbar
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-
+        // Notifications alert
         ImageButton notifications_img_btn = (ImageButton) findViewById(R.id.notifications_image_bttn);
-
-//        getSupportActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
-//        getSupportActionBar().setTitle("PetSpace");
-
+        // Bottom post bar
         view = findViewById(R.id.bottom_post_bar);
 
         // Set actionbar with toolbar
@@ -82,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         // Hide keyboard upon loading main screen.
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         // Display bottom navigation bar upon loading.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -170,11 +178,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.Reset_Password:
                 Toast.makeText(MainActivity.this, "Reset Password", Toast.LENGTH_SHORT).show();
-
+                SendUserToForgotPasswordActivity();
                 break;
             case R.id.Logout:
-                Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
 
+                Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
+                mAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
+                SendUserToLoginActivity();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -182,6 +193,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Method for log out and send user to LoginActivity screen.
+    private void SendUserToLoginActivity() {
 
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+        finish();
+    }
+
+    //Method to redirect User to Forgot Password Activity.
+    private void SendUserToForgotPasswordActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, ForgotPasswordActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
 
 }

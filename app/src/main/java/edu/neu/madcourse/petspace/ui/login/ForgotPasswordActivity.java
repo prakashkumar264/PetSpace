@@ -21,39 +21,40 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import edu.neu.madcourse.petspace.MainActivity;
 import edu.neu.madcourse.petspace.R;
     public class ForgotPasswordActivity extends AppCompatActivity {
 
         private EditText ForgotEmail;
         private Button ForgotButton;
         FirebaseAuth mAuth;
+        Button cancel_back_to_main;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_forgot_password);
 
-            //Initialising Firebase Instance....
+            //Initialising Firebase Instance.
             mAuth = FirebaseAuth.getInstance();
             //Defining Views
             ForgotEmail = findViewById(R.id.forgot_email);
             ForgotButton = findViewById(R.id.forgot_button);
-
+            cancel_back_to_main = findViewById(R.id.cancel_back_to_main);
             ForgotButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String UserEmail =ForgotEmail.getText().toString().trim();
+                    String UserEmail = ForgotEmail.getText().toString().trim();
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
-                    if(!TextUtils.isEmpty(UserEmail))
-                    {
+                    if (!TextUtils.isEmpty(UserEmail)) {
                         mAuth.sendPasswordResetEmail(UserEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 
-                                if(task.isSuccessful())
-                                {
-                                    Toast.makeText(ForgotPasswordActivity.this,"Success!",Toast.LENGTH_SHORT).show();
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ForgotPasswordActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ForgotPasswordActivity.this, R.style.AlertDialogCustom));
                                     builder.setMessage("Password reset link has been sent to your e-mail address!");
 
@@ -62,27 +63,42 @@ import edu.neu.madcourse.petspace.R;
                                         public void onClick(DialogInterface dialog, int which) {
 
                                             //Sending User to Login Activity...
-                                            Intent loginIntent = new Intent(ForgotPasswordActivity.this,LoginActivity.class);
+                                            Intent loginIntent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
                                             startActivity(loginIntent);
                                             dialog.cancel();
                                         }
+
                                     });
 
                                     Dialog dialog = builder.create();
                                     dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                                     dialog.show();
-                                }
-                                else{
-                                    Toast.makeText(ForgotPasswordActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ForgotPasswordActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                         });
-
-
-
                     }
+                    // Method to handle cancel password reset click event
+                    cancel_back_to_main = findViewById(R.id.cancel_back_to_main);
+                    cancel_back_to_main.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            SendUserToMainActivity();
+                        }
+                    });
+
                 }
             });
+        }
+
+        //Method to redirect User to MainActivity.
+        private void SendUserToMainActivity() {
+            Intent forgotIntent = new Intent(ForgotPasswordActivity.this, MainActivity.class);
+            forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(forgotIntent);
+            finish();
         }
     }
