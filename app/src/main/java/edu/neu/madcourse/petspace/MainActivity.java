@@ -176,12 +176,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
 
                 break;
-            case R.id.Reset_Password:
-                Toast.makeText(MainActivity.this, "Reset Password", Toast.LENGTH_SHORT).show();
-                SendUserToForgotPasswordActivity();
-                break;
             case R.id.About:
                 Toast.makeText(MainActivity.this, "About", Toast.LENGTH_SHORT).show();
+                SendUserToAboutActivity();
+
+                break;
+            case R.id.Reset_Password:
+                Toast.makeText(MainActivity.this, "Reset Password", Toast.LENGTH_SHORT).show();
                 SendUserToForgotPasswordActivity();
                 break;
             case R.id.Logout:
@@ -210,6 +211,15 @@ public class MainActivity extends AppCompatActivity {
     private void SendUserToForgotPasswordActivity() {
 
         Intent forgotIntent =new Intent(MainActivity.this, ForgotPasswordActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User toAbout Activity.
+    private void SendUserToAboutActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, AboutActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();

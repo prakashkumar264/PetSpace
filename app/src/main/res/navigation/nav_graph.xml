@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginActivity">
-    <navigation android:id="@+id/navigation"
+    <navigation
+        android:id="@+id/navigation"
         app:startDestination="@id/loginActivity">
         <activity
             android:id="@+id/loginActivity"
             android:name="edu.neu.madcourse.petspace.ui.login.LoginActivity"
             android:label="activity_login"
-            tools:layout="@layout/activity_login" >
+            tools:layout="@layout/activity_login">
             <action
                 android:id="@+id/action_loginActivity_to_mainActivity"
                 app:destination="@id/mainActivity" />
@@ -21,4 +22,24 @@
             android:label="activity_main"
             tools:layout="@layout/activity_main" />
     </navigation>
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="edu.neu.madcourse.petspace.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="edu.neu.madcourse.petspace.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
 </navigation>

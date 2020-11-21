@@ -62,17 +62,17 @@
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/Reset_Password"
-                android:icon="@drawable/ic_baseline_refresh_24"
-                android:orderInCategory="8"
-                android:title="@string/reset_password"
-                app:showAsAction="never" />
-
-            <item
                 android:id="@+id/About"
                 android:icon="@drawable/ic_baseline_info_24"
                 android:orderInCategory="8"
                 android:title="@string/About"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/Reset_Password"
+                android:icon="@drawable/ic_baseline_refresh_24"
+                android:orderInCategory="8"
+                android:title="@string/reset_password"
                 app:showAsAction="never" />
 
             <item

@@ -66,4 +66,8 @@
     <string name="register_new_account">Register new account</string>
     <string name="register_screen">Register</string>
     <string name="About">About</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
 </resources>

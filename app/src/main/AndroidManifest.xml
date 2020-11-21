@@ -11,12 +11,14 @@
         android:roundIcon="@drawable/pets_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.PetSpace.NoActionBar"></activity>
-
+            android:theme="@style/Theme.PetSpace.NoActionBar" />
         <activity
             android:name=".ui.login.ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password"
