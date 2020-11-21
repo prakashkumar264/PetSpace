@@ -56,7 +56,7 @@ import edu.neu.madcourse.petspace.R;
                                 if (task.isSuccessful()) {
                                     Toast.makeText(ForgotPasswordActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ForgotPasswordActivity.this, R.style.AlertDialogCustom));
-                                    builder.setMessage("Password reset link has been sent to your e-mail address!");
+                                    builder.setMessage("A Password reset link has been sent to your e-mail address!");
 
                                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
@@ -100,5 +100,17 @@ import edu.neu.madcourse.petspace.R;
             forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(forgotIntent);
             finish();
+        }
+
+        /**
+         * Called when the user taps the Cancel button.
+         * @param view the View object that was clicked
+         */
+        public void onClickCancel(View view) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ForgotPasswordActivity.this, R.style.AlertDialogCustom));
+            builder.setMessage("Reset Password Canceled!");
+            //Sending User back.
+            Intent loginIntent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
         }
     }

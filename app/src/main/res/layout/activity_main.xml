@@ -52,29 +52,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="130dp"
                 android:layout_gravity="bottom"></include>
+
             <androidx.recyclerview.widget.RecyclerView
 
                 android:id="@+id/all_posts_feed"
                 android:layout_width="match_parent"
                 android:layout_height="547dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:scrollbars="vertical" />
 
 
         </LinearLayout>
 
 
     </RelativeLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:layout_marginBottom="3dp"
-        app:menu="@menu/bottom_nav_menu">
-
-    </com.google.android.material.navigation.NavigationView>
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
