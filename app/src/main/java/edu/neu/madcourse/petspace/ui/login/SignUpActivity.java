@@ -29,7 +29,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
         private EditText emailEt, passwordTV;
         private Button regBtn;
-        private ProgressBar progressBar;
 
         private FirebaseAuth mAuth;
         @Override
@@ -50,7 +49,6 @@ import com.google.firebase.auth.FirebaseAuth;
         }
 
         private void registerNewUser() {
-            progressBar.setVisibility(View.VISIBLE);
 
             String email, password;
             email = emailEt.getText().toString();
@@ -71,14 +69,12 @@ import com.google.firebase.auth.FirebaseAuth;
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Registration Successful! Welcome to PetSpace!", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
 
                                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                                 startActivity(intent);
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "Registration failed! Please try again later.", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     });
