@@ -8,9 +8,9 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:padding="15dp"
-        android:text="@string/enter_the_e_mail_address_associated_with_your_account"
+        android:text="@string/about_petspace"
         android:textAlignment="center"
         android:textColor="@android:color/black"
 
@@ -20,8 +20,11 @@
         android:id="@+id/cancel_back_to_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginTop="30dp"
-        android:padding="15dp"
-        android:text="@string/cancel"
+        android:background="#651FFF"
+        android:onClick="onClickCancel"
+        android:text="@string/return_to_home"
+        android:textAllCaps="false"
         android:textColor="@android:color/white" />
 </RelativeLayout>
