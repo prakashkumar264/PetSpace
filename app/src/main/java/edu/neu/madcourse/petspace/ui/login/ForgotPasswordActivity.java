@@ -80,16 +80,6 @@ import edu.neu.madcourse.petspace.R;
 
                         });
                     }
-                    // Method to handle cancel password reset click event
-                    cancel_back_to_main = findViewById(R.id.cancel_back_to_main);
-                    cancel_back_to_main.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            SendUserToMainActivity();
-                        }
-                    });
-
                 }
             });
         }
@@ -107,10 +97,9 @@ import edu.neu.madcourse.petspace.R;
          * @param view the View object that was clicked
          */
         public void onClickCancel(View view) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ForgotPasswordActivity.this, R.style.AlertDialogCustom));
-            builder.setMessage("Reset Password Canceled!");
-            //Sending User back.
+            //Sending User to Main or Login depending on which screen they are at.
             Intent loginIntent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+            Toast.makeText(ForgotPasswordActivity.this, "Password Reset Cancelled!", Toast.LENGTH_SHORT).show();
             startActivity(loginIntent);
         }
     }
