@@ -55,17 +55,17 @@
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/Settings"
-                android:icon="@drawable/ic_baseline_settings_24"
-                android:orderInCategory="7"
-                android:title="@string/settings"
-                app:showAsAction="never" />
-
-            <item
                 android:id="@+id/About"
                 android:icon="@drawable/ic_baseline_info_24"
                 android:orderInCategory="8"
                 android:title="@string/About"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/Settings"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:orderInCategory="7"
+                android:title="@string/settings"
                 app:showAsAction="never" />
 
             <item

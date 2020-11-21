@@ -172,13 +172,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
 
                 break;
-            case R.id.Settings:
-                Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-
-                break;
             case R.id.About:
                 Toast.makeText(MainActivity.this, "About", Toast.LENGTH_SHORT).show();
                 SendUserToAboutActivity();
+
+                break;
+            case R.id.Settings:
+                Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
 
                 break;
             case R.id.Reset_Password:
