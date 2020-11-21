@@ -156,10 +156,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
 
                 break;
-            case R.id.New_Post:
-                Toast.makeText(MainActivity.this, "New Post", Toast.LENGTH_SHORT).show();
+
+            case R.id.Friend_Requests:
+                Toast.makeText(MainActivity.this, "Friend Requests", Toast.LENGTH_SHORT).show();
 
                 break;
+
+            case R.id.Notifications:
+                Toast.makeText(MainActivity.this, "Notifications", Toast.LENGTH_SHORT).show();
+
+                break;
+
             case R.id.Chat:
                 Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
 

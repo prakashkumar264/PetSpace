@@ -27,10 +27,17 @@
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/New_Post"
-                android:icon="@drawable/ic_baseline_post_add_24"
-                android:orderInCategory="3"
-                android:title="@string/new_post"
+                android:id="@+id/Friend_Requests"
+                android:icon="@drawable/ic_baseline_pets_24"
+                android:orderInCategory="2"
+                android:title="@string/Friend_Requests"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/Notifications"
+                android:icon="@drawable/ic_baseline_notifications_24"
+                android:orderInCategory="2"
+                android:title="@string/notifications"
                 app:showAsAction="never" />
 
             <item

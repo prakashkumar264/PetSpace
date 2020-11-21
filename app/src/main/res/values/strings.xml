@@ -51,7 +51,7 @@
     <string name="none">none</string>
     <string name="find_pet_friends">Find Pet Friends</string>
     <string name="messages">Messages</string>
-    <string name="find_pets">Find Pets</string>
+    <string name="find_pets">Find Pet Friends</string>
     <string name="new_post">New Post</string>
     <string name="text_color">Text Color</string>
     <string name="mainmenu">main_menu</string>
@@ -73,4 +73,6 @@
     <string name="about_petspace">About PetSpace</string>
     <string name="return_to_home">Return to Home</string>
     <string name="sign_up_for_a_new_petspace_account">Sign Up for A New PetSpace Account</string>
+    <string name="Friend_Requests">Friend Requests</string>
+    <string name="notifications">Notifications</string>
 </resources>
