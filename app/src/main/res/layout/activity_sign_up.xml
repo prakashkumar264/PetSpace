@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up for A New PetSpace Account" />
+        android:text="@string/sign_up_for_a_new_petspace_account" />
 
     <EditText
         android:id="@+id/email"

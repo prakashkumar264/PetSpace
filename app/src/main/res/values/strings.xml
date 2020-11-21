@@ -72,4 +72,5 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="about_petspace">About PetSpace</string>
     <string name="return_to_home">Return to Home</string>
+    <string name="sign_up_for_a_new_petspace_account">Sign Up for A New PetSpace Account</string>
 </resources>
