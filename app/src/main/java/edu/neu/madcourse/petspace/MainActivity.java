@@ -180,9 +180,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Reset Password", Toast.LENGTH_SHORT).show();
                 SendUserToForgotPasswordActivity();
                 break;
+            case R.id.About:
+                Toast.makeText(MainActivity.this, "About", Toast.LENGTH_SHORT).show();
+                SendUserToForgotPasswordActivity();
+                break;
             case R.id.Logout:
 
-                Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Logged Out of PetSpace. Come Back Soon!", Toast.LENGTH_SHORT).show();
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
                 SendUserToLoginActivity();

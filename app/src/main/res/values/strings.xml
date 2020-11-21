@@ -63,4 +63,7 @@
     <string name="email_address">Email Address</string>
     <string name="enter_e_mail_address">Enter E-Mail Address</string>
     <string name="enter_password">Enter Password</string>
+    <string name="register_new_account">Register new account</string>
+    <string name="register_screen">Register</string>
+    <string name="About">About</string>
 </resources>

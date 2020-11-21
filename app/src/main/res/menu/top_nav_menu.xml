@@ -69,6 +69,13 @@
                 app:showAsAction="never" />
 
             <item
+                android:id="@+id/About"
+                android:icon="@drawable/ic_baseline_info_24"
+                android:orderInCategory="8"
+                android:title="@string/About"
+                app:showAsAction="never" />
+
+            <item
                 android:id="@+id/Logout"
                 android:icon="@drawable/ic_baseline_logout_24"
                 android:orderInCategory="9"

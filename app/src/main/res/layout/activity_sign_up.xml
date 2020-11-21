@@ -9,34 +9,54 @@
     android:padding="16dp"
     tools:context=".ui.login.SignUpActivity">
 
+    <ImageView
+        android:id="@+id/login_icon2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:contentDescription="@string/todo"
+        app:srcCompat="@drawable/catdog" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register new account" />
+        android:text="Sign Up for A New PetSpace Account" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:autofillHints=""
+        android:hint="@string/email"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="@string/register_screen" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/cancel_back_to_main2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_marginTop="30dp"
+        android:onClick="onClickCancel"
+        android:padding="15dp"
+        android:text="@string/cancel"
+        android:textColor="@android:color/white" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 
 </LinearLayout>

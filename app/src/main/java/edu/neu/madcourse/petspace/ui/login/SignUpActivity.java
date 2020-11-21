@@ -88,6 +88,17 @@ import com.google.firebase.auth.FirebaseAuth;
             emailEt = findViewById(R.id.email);
             passwordTV = findViewById(R.id.password);
             regBtn = findViewById(R.id.register);
-            progressBar = findViewById(R.id.progressBar);
         }
+
+        /**
+         * Called when the user taps the Cancel button.
+         * @param view the View object that was clicked
+         */
+        public void onClickCancel(View view) {
+            //Sending User to Main or Login depending on which screen they are at.
+            Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
+            Toast.makeText(SignUpActivity.this, "Registration Cancelled!", Toast.LENGTH_SHORT).show();
+            startActivity(loginIntent);
+        }
+
     }
