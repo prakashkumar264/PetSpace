@@ -24,18 +24,22 @@
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/profile"
             tools:srcCompat="@drawable/profile" />
 
         <ImageButton
             android:id="@+id/add_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="150dp"
             android:background="@android:color/white"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_baseline_add_circle_24"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="163dp"
-            tools:layout_editor_absoluteY="170dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_img"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -103,6 +107,21 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 
+    <Button
+        android:id="@+id/cancel_back_to_main3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/save_profile_info"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:background="#651FFF"
+        android:onClick="onClickCancel"
+
+        android:padding="10dp"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
 
 
 

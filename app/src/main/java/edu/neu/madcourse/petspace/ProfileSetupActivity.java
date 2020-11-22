@@ -89,7 +89,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful())
                             {   SendUserToMainActivity();
-                                Toast.makeText(ProfileSetupActivity.this,"Your Account is Created Successfully",Toast.LENGTH_LONG);
+                                Toast.makeText(ProfileSetupActivity.this,"Your Account has been Created Successfully",Toast.LENGTH_LONG);
 
                             }
                             else {
@@ -246,6 +246,16 @@ public class ProfileSetupActivity extends AppCompatActivity {
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeIntent);
         finish();
+    }
+
+    /**
+     * Called when the user taps the 'Return to PetSpace' button.
+     * @param view the View object that was clicked
+     */
+    public void onClickCancel(View view) {
+        //Sending User back to MainActivity.
+        Intent loginIntent = new Intent(ProfileSetupActivity.this, MainActivity.class);
+        startActivity(loginIntent);
     }
 }
 

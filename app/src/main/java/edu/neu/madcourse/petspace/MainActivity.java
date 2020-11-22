@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.Profile:
-                Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                SendUserToMainActivity();
 
                 break;
             case R.id.About:
@@ -203,6 +203,14 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    // Method to send user to ProfileSetupActivity screen to edit profile.
+    private void SendUserToMainActivity() {
+        Intent homeIntent = new Intent(MainActivity.this, ProfileSetupActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeIntent);
+        finish();
     }
 
     // Method for log out and send user to LoginActivity screen.
