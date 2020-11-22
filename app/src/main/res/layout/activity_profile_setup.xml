@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_std_img"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ProfileSetupActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@drawable/profile" />
+
+        <ImageButton
+            android:id="@+id/add_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_add_circle_24"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="170dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/user_name"
+            android:drawableStart="@drawable/user_name_at_resize2"
+            android:padding="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ems="10"
+            android:drawablePadding="10dp"
+            android:layout_below="@+id/constraint_layout"
+            android:hint="@string/enter_user_display_name"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="50dp"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/full_name"
+            android:drawableStart="@drawable/name"
+            android:drawablePadding="10dp"
+            android:padding="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/user_name"
+            android:ems="10"
+            android:layout_marginTop="20dp"
+            android:hint="@string/enter_full_name"
+            android:inputType="textMultiLine"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/country_origin"
+            android:drawableStart="@drawable/ic_baseline_location_searching_24"
+            android:padding="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:drawablePadding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/full_name"
+            android:ems="10"
+            android:layout_marginTop="20dp"
+            android:hint="@string/enter_your_country_of_origin"
+            android:inputType="textMultiLine"
+            android:autofillHints="" />
+
+    <Button
+        android:id="@+id/save_profile_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/country_origin"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:background="#651FFF"
+        android:padding="10dp"
+
+        android:text="CONTINUE"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
+
+
+
+
+</RelativeLayout>

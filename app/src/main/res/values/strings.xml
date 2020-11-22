@@ -75,4 +75,7 @@
     <string name="sign_up_for_a_new_petspace_account">Sign Up for A New PetSpace Account</string>
     <string name="Friend_Requests">Friend Requests</string>
     <string name="notifications">Notifications</string>
+    <string name="enter_user_display_name">Enter User Display Name..</string>
+    <string name="enter_your_country_of_origin">Enter Your Country of Origin..</string>
+    <string name="enter_full_name">Enter Full Name..</string>
 </resources>
