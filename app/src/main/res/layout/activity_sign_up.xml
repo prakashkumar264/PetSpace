@@ -16,42 +16,78 @@
         android:contentDescription="@string/todo"
         app:srcCompat="@drawable/catdog" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up_for_a_new_petspace_account" />
-
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="15dp"
+        android:drawablePadding="10dp"
+        android:ems="10"
         android:hint="@string/email"
-        android:inputType="text" />
+        android:importantForAutofill="no"
+        android:inputType="text|textEmailAddress"
+        android:padding="5dp"
+        android:textSize="17sp" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:autofillHints="" />
+        android:padding="5dp"
+        android:textSize="17sp" />
+
+    <EditText
+        android:id="@+id/confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register_screen" />
+        android:layout_below="@id/confirm_password"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:text="Button"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        tools:text="Create Account"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
 
     <Button
         android:id="@+id/cancel_back_to_main2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/confirm_password"
         android:layout_marginTop="30dp"
-        android:onClick="onClickCancel"
-        android:padding="15dp"
-        android:text="@string/cancel"
-        android:textColor="@android:color/white" />
+        android:padding="10dp"
+        android:text="CANCEL"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        tools:text="CANCEL"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
 
     <FrameLayout
         android:layout_width="match_parent"

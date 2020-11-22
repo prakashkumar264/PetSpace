@@ -99,7 +99,7 @@
         android:background="#651FFF"
         android:padding="10dp"
 
-        android:text="CONTINUE"
+        android:text="@string/save"
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 

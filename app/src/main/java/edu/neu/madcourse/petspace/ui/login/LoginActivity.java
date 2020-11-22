@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.neu.madcourse.petspace.MainActivity;
+import edu.neu.madcourse.petspace.ProfileSetupActivity;
 import edu.neu.madcourse.petspace.R;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -24,8 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button LoginButton;
     private TextView UserEmail,UserPassword;
     private TextView SignUp,ForgotPassword;
-    private ProgressBar progressBar;
-    private ImageView google_signin;
     private static final String TAG="LoginActivity";
 
     @Override
@@ -33,13 +32,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        progressBar = new ProgressBar(this);
         mAuth = FirebaseAuth.getInstance();
         SignUp = findViewById(R.id.register_account_link);
         LoginButton = findViewById(R.id.login_account);
         UserEmail = findViewById(R.id.login_email);
         UserPassword = findViewById(R.id.login_password);
-        google_signin = findViewById(R.id.google_signin_button);
 
         //Signup Button Listener that redirects to SendUserToRegisterAccount() method......
         SignUp.setOnClickListener(new View.OnClickListener() {
@@ -99,14 +96,12 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
-                            {   SendUserToMainActivity();
-                                Toast.makeText(LoginActivity.this,"Login Successful. Welcome to PetSpace!",Toast.LENGTH_LONG).show();
-                                progressBar.invalidate();
+                            {   SendUserToActivityProfileSetup();
+//                                Toast.makeText(LoginActivity.this,"Login Successful. Welcome to PetSpace!",Toast.LENGTH_LONG).show();
                             }
                             else {
                                 String message = task.getException().getMessage();
                                 Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show(); }
-                            progressBar.invalidate();
                         }
                     });}
     }
@@ -116,8 +111,8 @@ public class LoginActivity extends AppCompatActivity {
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeIntent);
         finish();
-
     }
+
     private void SendUserToLoginActivity() {
         Intent homeIntent = new Intent(LoginActivity.this,LoginActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -129,6 +124,15 @@ public class LoginActivity extends AppCompatActivity {
     private void SendUserToForgotPasswordActivity() {
 
         Intent forgotIntent =new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User to ProfileSetupActivity.
+    private void SendUserToActivityProfileSetup() {
+
+        Intent forgotIntent =new Intent(LoginActivity.this, ProfileSetupActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();
