@@ -65,29 +65,28 @@
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/confirm_password"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:padding="10dp"
-        android:text="Button"
+        android:text="@string/create_new_account"
         android:textAlignment="center"
         android:textSize="18sp"
-        tools:text="Create Account"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        tools:text="Create Account" />
 
     <Button
         android:id="@+id/cancel_back_to_main2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/confirm_password"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:onClick="onClickCancel"
         android:padding="10dp"
-        android:text="CANCEL"
+        android:text="@string/cancel_back"
         android:textAlignment="center"
         android:textSize="18sp"
-        tools:text="CANCEL"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        tools:text="CANCEL" />
 
     <FrameLayout
         android:layout_width="match_parent"

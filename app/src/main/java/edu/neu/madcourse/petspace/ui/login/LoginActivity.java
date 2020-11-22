@@ -96,8 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
-                            {   SendUserToActivityProfileSetup();
-//                                Toast.makeText(LoginActivity.this,"Login Successful. Welcome to PetSpace!",Toast.LENGTH_LONG).show();
+                            {   SendUserToMainActivity();
+                                Toast.makeText(LoginActivity.this,"Login Successful. Welcome to PetSpace!",Toast.LENGTH_LONG).show();
                             }
                             else {
                                 String message = task.getException().getMessage();

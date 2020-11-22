@@ -30,7 +30,6 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="register">Register!</string>
     <string name="or_login_with">Or login with</string>
-    <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="update_password">Update Password</string>
     <string name="enter_a_valid_e_mail_address">Enter a valid e-mail address.</string>
@@ -82,4 +81,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="save">SAVE</string>
+    <string name="register_accn">register</string>
+    <string name="create_new_account">CREATE ACCOUNT</string>
+    <string name="cancel_back">CANCEL</string>
 </resources>

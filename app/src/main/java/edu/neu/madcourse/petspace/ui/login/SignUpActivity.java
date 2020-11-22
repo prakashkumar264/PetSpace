@@ -1,5 +1,6 @@
 package edu.neu.madcourse.petspace.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,84 +18,111 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
+
+import edu.neu.madcourse.petspace.AboutActivity;
 import edu.neu.madcourse.petspace.MainActivity;
+import edu.neu.madcourse.petspace.ProfileSetupActivity;
 import edu.neu.madcourse.petspace.R;
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-    public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
-        private EditText emailEt, passwordTV;
-        private Button regBtn;
+    private EditText registerEmail,registerPassword,registerConfirmPassword;
+    private Button registerButton;
+    private FirebaseAuth mAuth;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
 
-        private FirebaseAuth mAuth;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_sign_up);
+        mAuth = FirebaseAuth.getInstance();
+        registerEmail = findViewById(R.id.email);
+        registerPassword = findViewById(R.id.password);
+        registerConfirmPassword = findViewById(R.id.confirm_password);
+        registerButton = findViewById(R.id.register);
 
-            mAuth = FirebaseAuth.getInstance();
-
-            initializeUI();
-
-            regBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    registerNewUser();
-                }
-            });
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateNewAccount();
+            }
+        });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null)
+        {
+            SendUserToMainActivity();
         }
+    }
 
-        private void registerNewUser() {
 
-            String email, password;
-            email = emailEt.getText().toString();
-            password = passwordTV.getText().toString();
+    private void CreateNewAccount() {
 
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(getApplicationContext(), "Please enter a valid e-mail address.", Toast.LENGTH_LONG).show();
-                return;
-            }
-            if (TextUtils.isEmpty(password)) {
-                Toast.makeText(getApplicationContext(), "Please enter a valid password.", Toast.LENGTH_LONG).show();
-                return;
-            }
+        String email=registerEmail.getText().toString().trim();
+        String password=registerPassword.getText().toString().trim();
+        String confirmPassword=registerConfirmPassword.getText().toString().trim();
 
-            mAuth.createUserWithEmailAndPassword(email, password)
+        if(TextUtils.isEmpty(email))
+        {Toast.makeText(this,"Please write your Email",Toast.LENGTH_SHORT).show(); }
+        else if(TextUtils.isEmpty(password))
+        {Toast.makeText(this,"Please write your Password",Toast.LENGTH_SHORT).show(); }
+        else if(TextUtils.isEmpty((confirmPassword)))
+        {Toast.makeText(this,"Please Confirm your Password",Toast.LENGTH_SHORT).show(); }
+        else if (!password.equals(confirmPassword))
+        { Toast.makeText(this,"Your Password Doesn't Match!!!!",Toast.LENGTH_SHORT).show(); }
+
+        else {
+
+            mAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Registration Successful! Welcome to PetSpace!", Toast.LENGTH_LONG).show();
+                                SendUserToSetUpActivity();
+                                Toast.makeText(SignUpActivity.this, "Registeration Successfully", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                                startActivity(intent);
                             }
-                            else {
-                                Toast.makeText(getApplicationContext(), "Registration failed! Please try again later.", Toast.LENGTH_LONG).show();
+                            else
+                            {
+                                String message = task.getException().getMessage();
+                                Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-        }
 
-        private void initializeUI() {
-            emailEt = findViewById(R.id.email);
-            passwordTV = findViewById(R.id.password);
-            regBtn = findViewById(R.id.register);
-        }
-
-        /**
-         * Called when the user taps the Cancel button.
-         * @param view the View object that was clicked
-         */
-        public void onClickCancel(View view) {
-            //Sending User to Main or Login depending on which screen they are at.
-            Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
-            Toast.makeText(SignUpActivity.this, "Registration Cancelled!", Toast.LENGTH_SHORT).show();
-            startActivity(loginIntent);
         }
 
     }
+
+    private void SendUserToSetUpActivity() {
+        Intent setupIntent = new Intent(SignUpActivity.this,ProfileSetupActivity.class);
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupIntent);
+        finish();
+    }
+    private void SendUserToMainActivity() {
+        Intent homeIntent = new Intent(SignUpActivity.this,MainActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeIntent);
+        finish();
+    }
+
+    /**
+     * Called when the user taps the 'Return to PetSpace' button.
+     * @param view the View object that was clicked
+     */
+    public void onClickCancel(View view) {
+        //Sending User back to MainActivity.
+        Intent loginIntent = new Intent(SignUpActivity.this, MainActivity.class);
+        startActivity(loginIntent);
+    }
+
+}
