@@ -145,7 +145,7 @@
         android:background="#651FFF"
         android:padding="10dp"
         android:text="@string/save"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:textColor="#FFFFFF" />
 
     <Button
@@ -160,7 +160,7 @@
         android:onClick="onClickCancel"
         android:padding="10dp"
         android:text="@string/cancel"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:textColor="#FFFFFF" />
 
 
