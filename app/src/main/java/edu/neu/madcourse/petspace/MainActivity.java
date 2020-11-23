@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private View post_bar;
     private Toolbar mToolbar;
-    private DatabaseReference UserRef, PostRef, LikesRef, CommentRef;
+    private DatabaseReference MessagesRef, HomeRef, UserRef, PostRef, LikesRef, CommentRef;
     private String CurrentUserId;
     private RecyclerView postList;
     View view;
@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+        MessagesRef = FirebaseDatabase.getInstance().getReference().child("Messages");
+        HomeRef = FirebaseDatabase.getInstance().getReference().child("Home");
         // Menu toolbar
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);

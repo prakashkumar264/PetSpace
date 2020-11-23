@@ -116,12 +116,12 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Called when the user taps the 'Return to PetSpace' button.
+     * Method for register cancel back to login.
      * @param view the View object that was clicked
      */
     public void onClickCancel(View view) {
         //Sending User back to MainActivity.
-        Intent loginIntent = new Intent(SignUpActivity.this, MainActivity.class);
+        Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }
 

@@ -3,6 +3,7 @@ package edu.neu.madcourse.petspace;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,10 +37,11 @@ public class ProfileSetupActivity extends AppCompatActivity {
     private DatabaseReference Users_Ref;
     private StorageReference UserProfileImageRef;
     private Button save_profile_info;
-    private EditText user_name, full_name, country_origin;
+    private EditText user_name, full_name, city_origin, state_origin, country_origin;
     private ImageView Profile_Img;
     private String Current_UserId;
     private ImageButton Add_Photo;
+    public static final String Firebase_Server_URL = "https://petspace-2c47c.firebaseio.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +55,48 @@ public class ProfileSetupActivity extends AppCompatActivity {
         Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(Current_UserId);
         user_name = findViewById(R.id.user_name);
         full_name = findViewById(R.id.full_name);
+        city_origin = findViewById(R.id.city_origin);
+        state_origin = findViewById(R.id.state_origin);
         country_origin = findViewById(R.id.country_origin);
         Profile_Img = findViewById(R.id.profile_img);
         Add_Photo = findViewById(R.id.add_image);
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference uidRef = rootRef.child("Users").child(uid);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                EditText user_name = (EditText) findViewById(R.id.user_name);
+                user_name.setText(dataSnapshot.child("username").getValue(String.class));
+
+                EditText full_name = (EditText) findViewById(R.id.full_name);
+                full_name.setText(dataSnapshot.child("fullname").getValue(String.class));
+
+                EditText city_origin = (EditText) findViewById(R.id.city_origin);
+                city_origin.setText(dataSnapshot.child("city").getValue(String.class));
+
+                EditText state_origin = (EditText) findViewById(R.id.state_origin);
+                state_origin.setText(dataSnapshot.child("state").getValue(String.class));
+
+                EditText country_origin = (EditText) findViewById(R.id.country_origin);
+                country_origin.setText(dataSnapshot.child("country").getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        uidRef.addListenerForSingleValueEvent(eventListener);
+
         save_profile_info.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
             {
                 String username = user_name.getText().toString().trim();
                 String fullname = full_name.getText().toString().trim();
+                String cityorigin =city_origin.getText().toString().trim();
+                String stateorigin = state_origin.getText().toString().trim();
                 String countryorigin = country_origin.getText().toString().trim();
 
                 if(TextUtils.isEmpty(username))
@@ -82,6 +117,8 @@ public class ProfileSetupActivity extends AppCompatActivity {
                     HashMap userMap =new HashMap();
                     userMap.put("username",username);
                     userMap.put("fullname",fullname);
+                    userMap.put("city",cityorigin);
+                    userMap.put("state",stateorigin);
                     userMap.put("country",countryorigin);
 
                     Users_Ref.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
@@ -89,7 +126,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful())
                             {   SendUserToMainActivity();
-                                Toast.makeText(ProfileSetupActivity.this,"Your Account has been Created Successfully",Toast.LENGTH_LONG);
+                                Toast.makeText(ProfileSetupActivity.this,"Account Information Saved!",Toast.LENGTH_LONG);
 
                             }
                             else {
@@ -240,6 +277,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
             }
 
         }
+
+
+
     }
     private void SendUserToMainActivity() {
         Intent homeIntent = new Intent(ProfileSetupActivity.this, MainActivity.class);
