@@ -92,4 +92,9 @@
     <string name="full_name">Full Name</string>
     <string name="city">City</string>
     <string name="state">State</string>
+    <string name="posts">Posts</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="follow_users">follow_users</string>
+    <string name="profile_bio">Tell us about yourself and your love for pets!</string>
 </resources>

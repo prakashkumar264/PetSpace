@@ -86,8 +86,8 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                SendUserToSetUpActivity();
-                                Toast.makeText(SignUpActivity.this, "Registeration Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "Registration Successful. Now Setup Your Account!", Toast.LENGTH_SHORT).show();
+                                SendUserToProfileSetUpActivity();
 
                             }
                             else
@@ -102,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private void SendUserToSetUpActivity() {
+    private void SendUserToProfileSetUpActivity() {
         Intent setupIntent = new Intent(SignUpActivity.this,ProfileSetupActivity.class);
         setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(setupIntent);

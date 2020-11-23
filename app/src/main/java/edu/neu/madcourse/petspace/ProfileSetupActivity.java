@@ -37,7 +37,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
     private DatabaseReference Users_Ref;
     private StorageReference UserProfileImageRef;
     private Button save_profile_info;
-    private EditText user_name, full_name, city_origin, state_origin, country_origin;
+    private EditText user_name, full_name, city_origin, state_origin, country_origin, profile_bio;
     private ImageView Profile_Img;
     private String Current_UserId;
     private ImageButton Add_Photo;
@@ -58,6 +58,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
         city_origin = findViewById(R.id.city_origin);
         state_origin = findViewById(R.id.state_origin);
         country_origin = findViewById(R.id.country_origin);
+        profile_bio = findViewById(R.id.profile_bio);
         Profile_Img = findViewById(R.id.profile_img);
         Add_Photo = findViewById(R.id.add_image);
 
@@ -82,6 +83,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
                 EditText country_origin = (EditText) findViewById(R.id.country_origin);
                 country_origin.setText(dataSnapshot.child("country").getValue(String.class));
+
+                EditText profile_bio = (EditText) findViewById(R.id.profile_bio);
+                profile_bio.setText(dataSnapshot.child("profilebio").getValue(String.class));
             }
 
             @Override
@@ -98,6 +102,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
                 String cityorigin =city_origin.getText().toString().trim();
                 String stateorigin = state_origin.getText().toString().trim();
                 String countryorigin = country_origin.getText().toString().trim();
+                String profilebio = profile_bio.getText().toString().trim();
 
                 if(TextUtils.isEmpty(username))
                 {
@@ -107,9 +112,21 @@ public class ProfileSetupActivity extends AppCompatActivity {
                 {
                     Toast.makeText(ProfileSetupActivity.this,"Please Enter Your Full Name.",Toast.LENGTH_SHORT);
                 }
+                else if(TextUtils.isEmpty(cityorigin))
+                {
+                    Toast.makeText(ProfileSetupActivity.this,"Please Enter A Valid City!",Toast.LENGTH_SHORT);
+                }
+                else if(TextUtils.isEmpty(stateorigin))
+                {
+                    Toast.makeText(ProfileSetupActivity.this,"Please Enter A Valid State!",Toast.LENGTH_SHORT);
+                }
                 else if(TextUtils.isEmpty(countryorigin))
                 {
-                    Toast.makeText(ProfileSetupActivity.this,"Please Enter A Valid Country of Origin.",Toast.LENGTH_SHORT);
+                    Toast.makeText(ProfileSetupActivity.this,"Please Enter A Valid Country!",Toast.LENGTH_SHORT);
+                }
+                else if(TextUtils.isEmpty(profilebio))
+                {
+                    Toast.makeText(ProfileSetupActivity.this,"Please Enter A Personal Bio!",Toast.LENGTH_SHORT);
                 }
                 else
                 {
@@ -120,14 +137,15 @@ public class ProfileSetupActivity extends AppCompatActivity {
                     userMap.put("city",cityorigin);
                     userMap.put("state",stateorigin);
                     userMap.put("country",countryorigin);
+                    userMap.put("profilebio",profilebio);
 
                     Users_Ref.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful())
-                            {   SendUserToMainActivity();
+                            {
                                 Toast.makeText(ProfileSetupActivity.this,"Account Information Saved!",Toast.LENGTH_LONG);
-
+                                SendUserToMainActivity();
                             }
                             else {
                                 String message = task.getException().toString();

@@ -10,16 +10,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="173dp"
+        android:layout_width="219dp"
+        android:layout_height="152dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="7dp">
 
         <ImageView
             android:id="@+id/profile_img"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="144dp"
+            android:layout_height="146dp"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="23dp"
@@ -28,6 +28,7 @@
             app:layout_constraintEnd_toStartOf="@+id/add_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/profile"
             tools:srcCompat="@drawable/profile" />
 
@@ -55,7 +56,7 @@
         android:layout_below="@+id/constraint_layout"
         android:layout_centerInParent="true"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:drawableStart="@drawable/user_name_at_resize2"
         android:drawablePadding="10dp"
@@ -84,9 +85,10 @@
 
     <EditText
         android:id="@+id/city_origin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/full_name"
+        android:layout_alignParentStart="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
@@ -101,13 +103,14 @@
 
     <EditText
         android:id="@+id/state_origin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/city_origin"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/full_name"
         android:layout_centerInParent="true"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
+        android:layout_toEndOf="@id/city_origin"
         android:autofillHints=""
         android:drawableStart="@drawable/ic_baseline_map_24"
         android:drawablePadding="10dp"
@@ -133,14 +136,30 @@
         android:inputType="textMultiLine"
         android:padding="15dp" />
 
+    <EditText
+        android:id="@+id/profile_bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/country_origin"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/ic_baseline_info_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/profile_bio"
+        android:inputType="textMultiLine"
+        android:padding="15dp" />
 
     <Button
         android:id="@+id/save_profile_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/country_origin"
+        android:layout_below="@id/profile_bio"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="11dp"
         android:layout_marginEnd="15dp"
         android:background="#651FFF"
         android:padding="10dp"
@@ -154,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/save_profile_info"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="15dp"
         android:background="#651FFF"
         android:onClick="onClickCancel"
