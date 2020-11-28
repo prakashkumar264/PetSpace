@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/pets_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindFriends"></activity>
+        <activity android:name=".FriendRequestsActivity"></activity>
+        <activity android:name=".FindFriends" />
         <activity android:name=".ProfileSetupActivity" />
         <activity android:name=".ProfileActivity" />
         <activity
