@@ -40,7 +40,7 @@ import edu.neu.madcourse.petspace.R;
             mAuth = FirebaseAuth.getInstance();
             //Defining Views
             ForgotEmail = findViewById(R.id.forgot_email);
-            ForgotButton = findViewById(R.id.forgot_button);
+            ForgotButton = findViewById(R.id.dog_forum);
             cancel_back_to_main = findViewById(R.id.cancel_back_to_main);
             // Set toolbar title in forgotPasswordActivity screen.
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAbout);

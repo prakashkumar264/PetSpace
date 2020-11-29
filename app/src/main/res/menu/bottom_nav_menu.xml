@@ -16,9 +16,9 @@
         android:title="@string/chat" />
 
     <item
-        android:id="@+id/Messages"
-        android:icon="@drawable/ic_baseline_chat_24"
-        android:title="@string/messages" />
+        android:id="@+id/Nearby"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="@string/nearby" />
 
     <item
         android:id="@+id/Settings"

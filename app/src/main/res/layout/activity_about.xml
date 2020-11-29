@@ -31,15 +31,68 @@
 
         />
 
-    <Button
-        android:id="@+id/cancel_back_to_main"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/neu_img"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="30dp"
-        android:background="#651FFF"
-        android:onClick="onClickCancel"
-        android:text="@string/back_tomain"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white" />
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/neu" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="350dp"
+        android:layout_height="232dp"
+        android:layout_below="@id/neu_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-79dp"
+        android:fontFamily="sans-serif"
+        android:text="PetSpace is a Social Media Application developed by Pet Lovers for Pet Lovers! We developed this application as a Final Group Project at Northeastern University in CS5520 - Mobile Application Development. Enjoy!"
+        android:textAlignment="center"
+        android:textColor="#040303"
+        android:textColorHighlight="#6200EA"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="408dp"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="-131dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="411dp"
+                android:layout_height="557dp"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/dev_about" />
+
+            <Button
+                android:id="@+id/cancel_back_to_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="98dp"
+                android:background="#651FFF"
+                android:onClick="onClickCancel"
+                android:text="RETURN TO PETSPACE"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 </RelativeLayout>
