@@ -53,11 +53,11 @@ public class FindFriendsActivity extends AppCompatActivity {
         SearchList.setHasFixedSize(true);
         SearchList.setLayoutManager(new LinearLayoutManager(this));
 
-        SearchInputText = findViewById(R.id.search_friends);
+        SearchInputText = findViewById(R.id.search_friends_text);
         Back = findViewById(R.id.back_button);
         SearchFriendsButton = findViewById(R.id.search_friends_button);
 
-        SearchPeople("");
+        SearchFriends("");
 
         SearchFriendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,14 +69,14 @@ public class FindFriendsActivity extends AppCompatActivity {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
-                SearchPeople(searchBoxInput);
+                SearchFriends(searchBoxInput);
 
             }
         });
 
     }
 
-    private void SearchPeople(String searchBoxInput) {
+    private void SearchFriends(String searchBoxInput) {
 
         FirebaseRecyclerOptions<FindFriendsObject> options =
                 new FirebaseRecyclerOptions.Builder<FindFriendsObject>()

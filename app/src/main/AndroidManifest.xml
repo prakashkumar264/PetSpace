@@ -11,7 +11,9 @@
         android:roundIcon="@drawable/pets_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NotificationsActivity"></activity>
+        <activity android:name=".FriendRequestOptionActivity"></activity>
+        <activity android:name=".CommentsActivity" />
+        <activity android:name=".NotificationsActivity" />
         <activity android:name=".MessagingActivity" />
         <activity android:name=".ChatForumActivity" />
         <activity android:name=".SettingsActivity" />
