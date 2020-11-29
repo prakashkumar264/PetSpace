@@ -31,7 +31,7 @@ public class FindFriendsActivity extends AppCompatActivity {
     private EditText SearchInputText;
     private RecyclerView SearchList;
     private ImageButton Back;
-    private DatabaseReference AllUserRef;
+    private DatabaseReference AllUsersRef;
     private String CurrentUserId;
     private FirebaseAuth mAuth;
     private ImageButton SearchFriendsButton;
@@ -47,8 +47,7 @@ public class FindFriendsActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
-        AllUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
+        AllUsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         SearchList = findViewById(R.id.find_friends_list);
         SearchList.setHasFixedSize(true);
         SearchList.setLayoutManager(new LinearLayoutManager(this));
@@ -78,9 +77,14 @@ public class FindFriendsActivity extends AppCompatActivity {
 
     private void SearchFriends(String searchBoxInput) {
 
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference uidRef = rootRef.child("Users").child(uid);
+        DatabaseReference AllUsersRef = uidRef.child("fullname").child(uid);
+
         FirebaseRecyclerOptions<FindFriendsObject> options =
                 new FirebaseRecyclerOptions.Builder<FindFriendsObject>()
-                        .setQuery(AllUserRef.orderByChild("fullname").startAt(searchBoxInput).endAt(searchBoxInput+"\uf8ff"),
+                        .setQuery(AllUsersRef.orderByChild("fullname").startAt(searchBoxInput).endAt(searchBoxInput+"\uf8ff"),
                                 FindFriendsObject.class)
                         .build();
 
@@ -92,14 +96,14 @@ public class FindFriendsActivity extends AppCompatActivity {
                 // Bind data to RecyclerView
                 final String UserKey = getRef(position).getKey();
 
-                holder.setFullname(model.full_name);
-                holder.setUsername("@"+model.user_name);
-                holder.setProfileImage(model.profile_Image);
+                holder.setFullname(model.fullname);
+                holder.setUsername("@"+model.username);
+                holder.setProfileImage(model.profileImage);
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(FindFriendsActivity.this,"Open Profile",Toast.LENGTH_SHORT).show();
-                        SendUserToHisProfileActivity(UserKey);
+                        SendUserToProfileActivity(UserKey);
 
                     }
                 });
@@ -149,7 +153,7 @@ public class FindFriendsActivity extends AppCompatActivity {
 
         }
     }
-    public void SendUserToHisProfileActivity(String UserKey)
+    public void SendUserToProfileActivity(String UserKey)
     {
         Intent sendProfile = new Intent(FindFriendsActivity.this,ProfileActivity.class);
         sendProfile.putExtra("UserKey",UserKey);

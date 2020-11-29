@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         // Display bottom navigation bar upon loading.
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -158,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.Chat:
 
-                        SendUserToChatForumActivity();
+                        SendUserToChatMessagingActivity();
 
                         break;
-                    case R.id.Profile:
+                    case R.id.Messages:
 
-                        SendUserToProfileActivity();
+                        SendUserToMessagingActivity();
 
                         break;
                     case R.id.Settings:
@@ -221,6 +221,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void uploadData(String content, String valueOf) {
         String timestamp = String.valueOf(System.currentTimeMillis());
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
         String filePathAndName = "Posts/" + "post_" + timestamp;
         if(!valueOf.equals("noImage")){
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(filePathAndName);
@@ -240,7 +244,16 @@ public class MainActivity extends AppCompatActivity {
                                 hashMap.put("pimage", downloadUri);
                                 hashMap.put("ptime", timestamp );
 
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                                DatabaseReference uidRef = rootRef.child("Users").child(uid);
+                                DatabaseReference reference = uidRef.child("Posts").child(uid);
+
+
+//                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+//
+
                                 reference.child(timestamp).setValue(hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -278,7 +291,12 @@ public class MainActivity extends AppCompatActivity {
             hashMap.put("pimage", "noImage");
             hashMap.put("ptime", timestamp );
 
-            DatabaseReference reference = PostRef;
+            String usid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference uidRef = rootRef.child("Users").child(usid);
+            DatabaseReference reference = uidRef.child("Posts").child(usid);
+
+//            DatabaseReference reference = PostRef;
             reference.child(timestamp).setValue(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -435,7 +453,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.Chat:
 
-                SendUserToChatForumActivity();
+                SendUserToChatMessagingActivity();
 
                 break;
             case R.id.Messages:
@@ -537,10 +555,10 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    //Method to redirect User to SettingsActivity.
-    private void SendUserToChatForumActivity() {
+    //Method to redirect User to ChatMessagingActivity.
+    private void SendUserToChatMessagingActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, ChatForumActivity.class);
+        Intent forgotIntent =new Intent(MainActivity.this, ChatMessagingActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();

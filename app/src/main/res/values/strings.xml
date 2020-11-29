@@ -97,5 +97,8 @@
     <string name="following">Following</string>
     <string name="follow_users">follow_users</string>
     <string name="profile_bio">Tell us about yourself and your love for pets!</string>
-    <string name="search_for_pet_friends">Search for Pet Friends</string>
+    <string name="search_for_pet_friends">Find Pet Friends</string>
+    <string name="input_placeholder">Type a message..</string>
+    <string name="how_are_you_doing_shall_we_zoom_meet_with_the_team_now">How are you doing? Shall we Zoom meet with the Team now?</string>
+    <string name="gunther_gustufson">Gunther Gustufson</string>
 </resources>

@@ -16,10 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".FriendRequestOptionActivity"></activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".CommentsActivity" />
         <activity android:name=".NotificationsActivity" />
         <activity android:name=".MessagingActivity" />
-        <activity android:name=".ChatForumActivity" />
+        <activity android:name=".ChatMessagingActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".FriendRequestsActivity" />
         <activity android:name=".FindFriendsActivity" />

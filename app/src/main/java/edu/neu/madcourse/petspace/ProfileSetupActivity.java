@@ -3,6 +3,9 @@ package edu.neu.madcourse.petspace;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Icon;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +48,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
     private ImageButton Add_Photo;
     public static final String Firebase_Server_URL = "https://petspace-2c47c.firebaseio.com/";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,9 +56,18 @@ public class ProfileSetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_setup);
         save_profile_info = findViewById(R.id.save_profile_info);
         mAuth = FirebaseAuth.getInstance();
-        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
+
         Current_UserId = mAuth.getCurrentUser().getUid();
-        Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(Current_UserId);
+
+
+//        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference uidRef = rootRef.child("Users").child(uid);
+//        DatabaseReference reference = uidRef.child("Posts").child(uid);
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("profileImage");
+
         user_name = findViewById(R.id.user_name);
         full_name = findViewById(R.id.full_name);
         city_origin = findViewById(R.id.city_origin);
@@ -62,10 +77,6 @@ public class ProfileSetupActivity extends AppCompatActivity {
         Profile_Img = findViewById(R.id.profile_img);
         Add_Photo = findViewById(R.id.add_image);
 
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference uidRef = rootRef.child("Users").child(uid);
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -86,12 +97,22 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
                 EditText profile_bio = (EditText) findViewById(R.id.profile_bio);
                 profile_bio.setText(dataSnapshot.child("profilebio").getValue(String.class));
+
+                ImageView profile_img = (ImageView) findViewById(R.id.profile_img);
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
-        uidRef.addListenerForSingleValueEvent(eventListener);
+
+//        String usid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference uidRef = rootRef.child("Users").child(usid);
+//        DatabaseReference reference = uidRef.child("profileImage").child(uid);
+
+
+        Users_Ref.addListenerForSingleValueEvent(eventListener);
 
         save_profile_info.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -242,9 +263,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
         if(requestCode== GalleryPic && resultCode == RESULT_OK && data != null) {
             Uri ImageUri = data.getData();
+
             CropImage.activity(ImageUri)
                     .setAspectRatio(1,1)
-                    .setCropShape(CropImageView.CropShape.OVAL)
                     .start(this);
         }
         // IMAGE Cropping Source
@@ -257,6 +278,8 @@ public class ProfileSetupActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK)
             {
                 Uri resultUri =result.getUri();
+
+
                 StorageReference filePath = UserProfileImageRef.child(Current_UserId + ".jpg");
                 filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -267,7 +290,12 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
                             // Store Img in FireBase
                             final String downloadUrl = task.getResult().getStorage().toString();
-                            Users_Ref.child("profileImage").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference uidRef = rootRef.child("Users").child(uid);
+                            uidRef.child("profileImage").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful())

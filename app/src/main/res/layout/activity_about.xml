@@ -31,15 +31,36 @@
 
         />
 
-    <Button
-        android:id="@+id/cancel_back_to_main"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/neu_img"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="30dp"
-        android:background="#651FFF"
-        android:onClick="onClickCancel"
-        android:text="@string/back_tomain"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white" />
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/neu" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/neu_img"
+        android:layout_centerHorizontal="true"
+        android:text="PetSpace is a Social Media Application developed by Pet Lovers for Pet Lovers! We developed this application as a Final Group Project at Northeastern University in CS5520 - Mobile Application Development. Enjoy!" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textView"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/cancel_back_to_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#651FFF"
+            android:onClick="onClickCancel"
+            android:text="@string/back_tomain"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 </RelativeLayout>
