@@ -101,4 +101,10 @@
     <string name="input_placeholder">Type a message..</string>
     <string name="how_are_you_doing_shall_we_zoom_meet_with_the_team_now">How are you doing? Shall we Zoom meet with the Team now?</string>
     <string name="gunther_gustufson">Gunther Gustufson</string>
+    <string name="choose_picture_and_send">Choose Picture and Send</string>
+    <string name="failure_permission">Failure to obtain permission!</string>
+    <string name="permission_not_granted">PERMISSION NOT GRANTED!</string>
+    <string name="picture_chosen">Picture is chosen.</string>
+    <string name="button_disabled">Choosing a picture disabled</string>
+    <string name="intro_text">Choose a picture from the Gallery to send:</string>
 </resources>

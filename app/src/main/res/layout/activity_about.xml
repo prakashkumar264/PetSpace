@@ -40,17 +40,32 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="357dp"
+        android:layout_height="160dp"
         android:layout_below="@id/neu_img"
         android:layout_centerHorizontal="true"
-        android:text="PetSpace is a Social Media Application developed by Pet Lovers for Pet Lovers! We developed this application as a Final Group Project at Northeastern University in CS5520 - Mobile Application Development. Enjoy!" />
+        android:layout_marginTop="-9dp"
+        android:fontFamily="sans-serif"
+        android:text="PetSpace is a Social Media Application developed by Pet Lovers for Pet Lovers! We developed this application as a Final Group Project at Northeastern University in CS5520 - Mobile Application Development. Enjoy!"
+        android:textAlignment="center"
+        android:textColor="#040303"
+        android:textColorHighlight="#6200EA"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/textView"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/petspace_logo_about"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/catdog" />
 
         <Button
             android:id="@+id/cancel_back_to_main"
