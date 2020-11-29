@@ -233,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
 
+
         //init post list
         posts = new ArrayList<>();
 
