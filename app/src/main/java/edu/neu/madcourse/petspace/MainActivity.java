@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -28,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
@@ -42,8 +46,12 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import edu.neu.madcourse.petspace.adapters.AdapterPosts;
+import edu.neu.madcourse.petspace.data.model.ModelPost;
 import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
 import edu.neu.madcourse.petspace.ui.login.LoginActivity;
 
@@ -55,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private DatabaseReference MessagesRef, HomeRef, UserRef, PostRef, LikesRef, CommentRef;
     private String CurrentUserId;
-    private RecyclerView postList;
+
     View view;
     private Context mContext;
     private Activity mActivity;
@@ -77,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
     String[] cameraPermissions;
     String[] storagePermissions;
 
+    //Post Data
+    private RecyclerView recyclerView;
+    private List<ModelPost> posts;
+    private AdapterPosts adapterPosts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,9 +98,6 @@ public class MainActivity extends AppCompatActivity {
         //init permissions Arrays
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-
-
 
         // Get the application context
         mContext = getApplicationContext();
@@ -216,9 +226,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //recycler view for post
+        recyclerView = view.findViewById(R.id.all_posts_feed);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(layoutManager);
+
+        //init post list
+        posts = new ArrayList<>();
+
+        loadPosts();
 
     }
 
+    private void loadPosts() {
+        DatabaseReference ref = PostRef;
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                posts.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+                    posts.add(modelPost);
+
+                    adapterPosts = new AdapterPosts(MainActivity.this, posts);
+                    recyclerView.setAdapter(adapterPosts);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //in case of error
+                Toast.makeText(MainActivity.this, "permission"+error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    //Method to publish post start here
     private void uploadData(String content, String valueOf) {
         String timestamp = String.valueOf(System.currentTimeMillis());
         String filePathAndName = "Posts/" + "post_" + timestamp;
@@ -350,6 +395,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "Camera Permission Requested", Toast.LENGTH_SHORT).show();
         ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE);
     }
+    //methods to publish post end here
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
