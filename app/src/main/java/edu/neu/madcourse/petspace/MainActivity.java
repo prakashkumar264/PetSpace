@@ -277,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
             hashMap.put("pcontent", content);
             hashMap.put("pimage", "noImage");
             hashMap.put("ptime", timestamp );
-
             DatabaseReference reference = PostRef;
             reference.child(timestamp).setValue(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -289,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(MainActivity.this, "no image error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, reference+ "no image error"+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
