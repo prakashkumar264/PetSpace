@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
-
-
         // Get the application context
         mContext = getApplicationContext();
 
@@ -158,12 +156,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.Chat:
 
-                        SendUserToChatMessagingActivity();
+                        SendUserToChatForumOption();
 
                         break;
-                    case R.id.Messages:
+                    case R.id.Nearby:
 
-                        SendUserToMessagingActivity();
+                        SendUserToMapNearbyActivity();
 
                         break;
                     case R.id.Settings:
@@ -186,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 // change notifications image - alert that notifications are pending
                 notifications_img_btn.setImageResource(R.drawable.ic_baseline_notifications_active_24);
 
-                }
+            }
 
         });
 
@@ -204,18 +202,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //get data
                 String content = posttext.getText().toString();
-                if(TextUtils.isEmpty(content)){
+                if (TextUtils.isEmpty(content)) {
                     Toast.makeText(MainActivity.this, "Enter Text.....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(image_uri == null){
+                if (image_uri == null) {
                     uploadData(content, "noImage");
-                }else{
+                } else {
                     uploadData(content, String.valueOf(image_uri));
                 }
             }
         });
-
 
     }
 
@@ -226,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         String filePathAndName = "Posts/" + "post_" + timestamp;
-        if(!valueOf.equals("noImage")){
+        if (!valueOf.equals("noImage")) {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(filePathAndName);
             storageReference.putFile(Uri.parse(valueOf))
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -234,15 +231,15 @@ public class MainActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //image is uploaded to firebase storage
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
+                            while (!uriTask.isSuccessful()) ;
                             String downloadUri = uriTask.getResult().toString();
-                            if(uriTask.isSuccessful()){
+                            if (uriTask.isSuccessful()) {
 
                                 HashMap<Object, String> hashMap = new HashMap<>();
                                 hashMap.put("uid", CurrentUserId);
                                 hashMap.put("pcontent", content);
                                 hashMap.put("pimage", downloadUri);
-                                hashMap.put("ptime", timestamp );
+                                hashMap.put("ptime", timestamp);
 
 
                                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -267,11 +264,10 @@ public class MainActivity extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(MainActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
-
 
 
                         }
@@ -280,16 +276,16 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             //Failed uploading image
-                            Toast.makeText(MainActivity.this, "putting error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "putting error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
-        }else{
+        } else {
             HashMap<Object, String> hashMap = new HashMap<>();
             hashMap.put("uid", CurrentUserId);
             hashMap.put("pcontent", content);
             hashMap.put("pimage", "noImage");
-            hashMap.put("ptime", timestamp );
+            hashMap.put("ptime", timestamp);
 
             String usid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -307,12 +303,13 @@ public class MainActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(MainActivity.this, "no image error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "no image error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
         }
     }
+
     private void showImagePickDialog() {
         String[] options = {"Camera", "Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -320,19 +317,19 @@ public class MainActivity extends AppCompatActivity {
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(i == 0){
-                    if(!checkCameraPermission()){
+                if (i == 0) {
+                    if (!checkCameraPermission()) {
 
                         requestCameraPermission();
-                    }else{
+                    } else {
                         Toast.makeText(MainActivity.this, "Pickfromcamer", Toast.LENGTH_SHORT).show();
                         PickFromCamera();
                     }
                 }
-                if(i == 1){
-                    if(!checkStoragePermission()){
+                if (i == 1) {
+                    if (!checkStoragePermission()) {
                         requestStoragePermission();
-                    }else{
+                    } else {
                         Toast.makeText(MainActivity.this, "PickfromGAllery", Toast.LENGTH_SHORT).show();
                         PickFromGallery();
                     }
@@ -341,31 +338,37 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.create().show();
     }
+
     private void PickFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, IMAGE_PICK_STORAGE_CODE);
     }
+
     private void PickFromCamera() {
         ContentValues cv = new ContentValues();
-        cv.put(MediaStore.Images.Media.TITLE,"Temp Pick");
+        cv.put(MediaStore.Images.Media.TITLE, "Temp Pick");
         cv.put(MediaStore.Images.Media.DESCRIPTION, "Temp Descr");
         image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
-        Intent intent  = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
     }
-    private boolean checkStoragePermission(){
+
+    private boolean checkStoragePermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
-    private void requestStoragePermission(){
+
+    private void requestStoragePermission() {
         ActivityCompat.requestPermissions(this, storagePermissions, STORAGE_REQUEST_CODE);
     }
-    private boolean checkCameraPermission(){
+
+    private boolean checkCameraPermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
     }
-    private void requestCameraPermission(){
+
+    private void requestCameraPermission() {
         Toast.makeText(MainActivity.this, "Camera Permission Requested", Toast.LENGTH_SHORT).show();
         ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE);
     }
@@ -373,32 +376,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:{
-                if(grantResults.length>0){
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE: {
+                if (grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if(cameraAccepted && storageAccepted){
+                    if (cameraAccepted && storageAccepted) {
                         PickFromCamera();
-                    }else{
+                    } else {
                         Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
 
                 }
             }
             break;
-            case STORAGE_REQUEST_CODE:{
-                    if(grantResults.length>0){
-                        boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                        if(storageAccepted){
-                            PickFromGallery();
-                        }else{
-                            Toast.makeText(this, "Gallery", Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-
+            case STORAGE_REQUEST_CODE: {
+                if (grantResults.length > 0) {
+                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    if (storageAccepted) {
+                        PickFromGallery();
+                    } else {
+                        Toast.makeText(this, "Gallery", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+
+                }
             }
             break;
         }
@@ -406,11 +409,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode == RESULT_OK){
-            if(requestCode == IMAGE_PICK_STORAGE_CODE){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == IMAGE_PICK_STORAGE_CODE) {
                 image_uri = data.getData();
-            }
-            else if(requestCode == IMAGE_PICK_CAMERA_CODE){
+            } else if (requestCode == IMAGE_PICK_CAMERA_CODE) {
 
             }
         }
@@ -421,11 +423,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top_nav_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.home:
 
@@ -453,12 +458,12 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.Chat:
 
-                SendUserToChatMessagingActivity();
+                SendUserToChatForumOption();
 
                 break;
-            case R.id.Messages:
+            case R.id.Nearby:
 
-                SendUserToMessagingActivity();
+                SendUserToMapNearbyActivity();
 
                 break;
             case R.id.Profile:
@@ -467,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.About:
 
-                 SendUserToAboutActivity();
+                SendUserToAboutActivity();
 
                 break;
             case R.id.Settings:
@@ -491,6 +496,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 
     // Method to send user to ProfileSetupActivity screen to edit profile.
     private void SendUserToMainActivity() {
@@ -545,6 +552,15 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    //Method to redirect User to Profile Activity.
+    private void SendUserToChatForumOption() {
+
+        Intent forgotIntent = new Intent(MainActivity.this, ChatForumOption.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
 
     //Method to redirect User toAbout Activity.
     private void RefreshHome() {
@@ -565,9 +581,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Method to redirect User to MessagingActivity.
-    private void SendUserToMessagingActivity() {
+    private void SendUserToMapNearbyActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, MessagingActivity.class);
+        Intent forgotIntent =new Intent(MainActivity.this, MapNearbyActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();

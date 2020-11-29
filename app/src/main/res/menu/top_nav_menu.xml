@@ -48,7 +48,7 @@
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/Messages"
+                android:id="@+id/Nearby"
                 android:icon="@drawable/ic_baseline_chat_24"
                 android:orderInCategory="5"
                 android:title="@string/messages"

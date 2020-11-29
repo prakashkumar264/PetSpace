@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.ForgotPasswordActivity">
+    tools:context=".ChatForumOption">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarAbout"
+        android:id="@+id/toolbarChatForumOption"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#651FFF"
@@ -17,48 +17,58 @@
         android:requiresFadingEdge="horizontal"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:visibility="visible"
+        app:title="Choose A Chat Forum"
         app:titleTextColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/toolbarChatForumOption"
+        android:id="@+id/textViewChatForumOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:text="@string/enter_the_e_mail_address_associated_with_your_account"
+        android:text="@string/choose_a_chat_forums"
         android:textAlignment="center"
 
         android:textColor="@android:color/black" />
 
-    <EditText
-        android:id="@+id/forgot_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:autofillHints=""
-        android:hint="@string/email_address"
-        android:inputType="textEmailAddress"
-
-        android:padding="15dp"
-        android:textSize="14sp" />
     <Button
+        android:id="@+id/dog_forum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/forgot_email"
+        android:layout_below="@id/cat_forum"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:background="#651FFF"
         android:padding="15dp"
-        android:text="@string/reset_password"
+        android:text="@string/dogs_chat"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/cat_forum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewChatForumOption"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:background="#651FFF"
+        android:onClick="onClickCatsChat"
+        android:padding="15dp"
+        android:text="@string/cats_chat"
         android:textColor="@android:color/white"
-        android:id="@+id/dog_forum"
-        />
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/cancel_back_to_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/dog_forum"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:background="#651FFF"
         android:onClick="onClickCancel"
         android:padding="15dp"
-        android:text="@string/cancel"
+        android:text="@string/back_to_main"
         android:textColor="@android:color/white" />
 </RelativeLayout>
