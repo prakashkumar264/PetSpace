@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_chevron_left"
+            android:onClick="onClickCancel"
+            android:scaleType="center" />
+
+        <EditText
+            android:id="@+id/search_friends_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@android:color/white"
+            android:hint="@string/search_for_pet_friends"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textSize="13sp" />
+        <ImageButton
+            android:id="@+id/search_friends_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:textColor="@android:color/black"
+            android:background="@drawable/ic_search"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            android:layout_marginEnd="10dp"
+
+            />
+    </LinearLayout>
+</RelativeLayout>

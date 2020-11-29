@@ -21,8 +21,9 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarAbout);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("About PetSpace");
 
     }
 

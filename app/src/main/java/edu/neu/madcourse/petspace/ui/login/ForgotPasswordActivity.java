@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,7 +19,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -41,6 +42,10 @@ import edu.neu.madcourse.petspace.R;
             ForgotEmail = findViewById(R.id.forgot_email);
             ForgotButton = findViewById(R.id.forgot_button);
             cancel_back_to_main = findViewById(R.id.cancel_back_to_main);
+            // Set toolbar title in forgotPasswordActivity screen.
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAbout);
+            toolbar.setTitle("Reset Password");
+            // Handle Click Events.
             ForgotButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAbout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#651FFF"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:hapticFeedbackEnabled="false"
+        android:requiresFadingEdge="horizontal"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:visibility="visible"
+        app:title="About PetSpace"
+        app:titleTextColor="#FFFFFF" />
 
     <TextView
         android:layout_width="match_parent"
@@ -12,7 +27,7 @@
         android:padding="15dp"
         android:text="@string/about_petspace"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="@color/white"
 
         />
 

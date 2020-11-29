@@ -97,4 +97,5 @@
     <string name="following">Following</string>
     <string name="follow_users">follow_users</string>
     <string name="profile_bio">Tell us about yourself and your love for pets!</string>
+    <string name="search_for_pet_friends">Search for Pet Friends</string>
 </resources>

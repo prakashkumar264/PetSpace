@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         mActivity = MainActivity.this;
 
         // Get the widgets reference from XML layout
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbarAbout);
 
         // Set a title for toolbar
 //        mToolbar.setTitle("PetSpace");
@@ -147,23 +147,28 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+
+                        RefreshHome();
 
                         break;
                     case R.id.Search:
-                        Toast.makeText(MainActivity.this, "Find Pets", Toast.LENGTH_SHORT).show();
+
+                        SendUserToFindFriendsActivity();
 
                         break;
                     case R.id.Chat:
-                        Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
+
+                        SendUserToChatForumActivity();
 
                         break;
                     case R.id.Profile:
-                        Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+
+                        SendUserToProfileActivity();
 
                         break;
                     case R.id.Settings:
-                        Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+
+                        SendUserToSettingsActivity();
 
                         break;
                 }
@@ -405,31 +410,37 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
-                Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+
+                RefreshHome();
 
                 break;
 
             case R.id.Search:
-                Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+
+                SendUserToFindFriendsActivity();
 
                 break;
 
             case R.id.Friend_Requests:
-                Toast.makeText(MainActivity.this, "Friend Requests", Toast.LENGTH_SHORT).show();
+
+                SendUserToFriendRequestsActivity();
 
                 break;
 
             case R.id.Notifications:
-                Toast.makeText(MainActivity.this, "Notifications", Toast.LENGTH_SHORT).show();
+
+                SendUserToNotificationsActivity();
 
                 break;
 
             case R.id.Chat:
-                Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
+
+                SendUserToChatForumActivity();
 
                 break;
             case R.id.Messages:
-                Toast.makeText(MainActivity.this, "Messages", Toast.LENGTH_SHORT).show();
+
+                SendUserToMessagingActivity();
 
                 break;
             case R.id.Profile:
@@ -437,12 +448,13 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.About:
-                Toast.makeText(MainActivity.this, "About", Toast.LENGTH_SHORT).show();
-                SendUserToAboutActivity();
+
+                 SendUserToAboutActivity();
 
                 break;
             case R.id.Settings:
-                Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+
+                SendUserToSettingsActivity();
 
                 break;
             case R.id.Reset_Password:
@@ -488,7 +500,80 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    //Method to redirect User to Forgot Password Activity.
+    private void SendUserToFindFriendsActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, FindFriendsActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User to Friend Requests Activity.
+    private void SendUserToFriendRequestsActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, FriendRequestsActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User to Profile Activity.
+    private void SendUserToProfileActivity() {
+
+        Intent forgotIntent = new Intent(MainActivity.this, ProfileActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+
     //Method to redirect User toAbout Activity.
+    private void RefreshHome() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, MainActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User to SettingsActivity.
+    private void SendUserToChatForumActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, ChatForumActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User to MessagingActivity.
+    private void SendUserToMessagingActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, MessagingActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User toAbout Activity.
+    private void SendUserToSettingsActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, SettingsActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User to NotificationsActivity.
+    private void SendUserToNotificationsActivity() {
+
+        Intent forgotIntent =new Intent(MainActivity.this, NotificationsActivity.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
+    //Method to redirect User to AboutActivity.
     private void SendUserToAboutActivity() {
         Intent forgotIntent =new Intent(MainActivity.this, AboutActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
