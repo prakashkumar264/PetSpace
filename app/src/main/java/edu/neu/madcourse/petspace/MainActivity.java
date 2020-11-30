@@ -15,9 +15,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.api.Distribution;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -28,10 +32,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,8 +48,12 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import edu.neu.madcourse.petspace.adapters.AdapterPosts;
+import edu.neu.madcourse.petspace.data.model.ModelPost;
 import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
 import edu.neu.madcourse.petspace.ui.login.LoginActivity;
 
@@ -76,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
     //permissions array
     String[] cameraPermissions;
     String[] storagePermissions;
+
+    private RecyclerView recyclerView;
+    private List<ModelPost> modelPosts;
+    private AdapterPosts adapterPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +152,15 @@ public class MainActivity extends AppCompatActivity {
         // Hide keyboard upon loading main screen.
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        //recyclerview and its properties
+        recyclerView = view.findViewById(R.id.all_posts_feed);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        modelPosts = new ArrayList<>();
+        loadPosts();
 
         // Display bottom navigation bar upon loading.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
@@ -217,6 +240,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void loadPosts() {
+        DatabaseReference ref = PostRef;
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                modelPosts.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                    modelPosts.add(modelPost);
+
+                    adapterPosts = new AdapterPosts(MainActivity.this, modelPosts);
+                    recyclerView.setAdapter(adapterPosts);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, ""+error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void uploadData(String content, String valueOf) {
@@ -438,11 +484,7 @@ public class MainActivity extends AppCompatActivity {
                 SendUserToChatForumActivity();
 
                 break;
-            case R.id.Messages:
 
-                SendUserToMessagingActivity();
-
-                break;
             case R.id.Profile:
                 SendUserToMainActivity();
 
@@ -540,7 +582,7 @@ public class MainActivity extends AppCompatActivity {
     //Method to redirect User to SettingsActivity.
     private void SendUserToChatForumActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, ChatForumActivity.class);
+        Intent forgotIntent =new Intent(MainActivity.this, ChatForumOption.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();
