@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         mActivity = MainActivity.this;
 
         // Get the widgets reference from XML layout
-        mToolbar = (Toolbar) findViewById(R.id.toolbarAbout);
+//        mToolbar = (Toolbar) findViewById(R.id.toolbarAbout);
 
         // Set a title for toolbar
 //        mToolbar.setTitle("PetSpace");

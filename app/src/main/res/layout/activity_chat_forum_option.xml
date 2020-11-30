@@ -26,8 +26,8 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="@string/choose_a_chat_forums"
-        android:textAlignment="center"
 
+        android:textAlignment="center"
         android:textColor="@android:color/black" />
 
     <Button
