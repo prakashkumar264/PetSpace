@@ -39,6 +39,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/roundshape_button"
+        android:onClick="onClickDogsChat"
         android:padding="15dp"
         android:text="@string/dogs_chat"
         android:textColor="@android:color/white" />

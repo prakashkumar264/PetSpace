@@ -25,8 +25,8 @@ public class ChatForumOption extends AppCompatActivity {
     }
 
     public void onClickDogsChat(View view) {
-//        Intent loginIntent = new Intent(ChatForumOption.this, MainActivity.class);
-//        startActivity(loginIntent);
+        Intent loginIntent = new Intent(ChatForumOption.this, ChatMessagingActivity_dogs.class);
+        startActivity(loginIntent);
     }
 
     /**

@@ -16,7 +16,8 @@
         android:roundIcon="@drawable/pets_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatForumOption"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".ChatForumOption" />
         <activity android:name=".MapNearbyActivity" />
         <activity android:name=".FriendRequestOptionActivity" />
         <activity
@@ -26,7 +27,8 @@
         <activity android:name=".NotificationsActivity" />
         <activity android:name=".MessagingActivity" />
         <activity android:name=".ChatMessagingActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".ChatMessagingActivity_dogs" />
+        <activity android:name=".SettingsHeadersActivity" />
         <activity android:name=".FriendRequestsActivity" />
         <activity android:name=".FindFriendsActivity" />
         <activity android:name=".ProfileSetupActivity" />

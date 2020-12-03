@@ -26,39 +26,39 @@ import android.view.View;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
-private static final String TAG = SettingsActivity.class.getSimpleName();
+    private static final String TAG = SettingsActivity.class.getSimpleName();
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
-        }
-
-public static class MainPreferenceFragment extends PreferenceFragment {
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.pref_main);
-
-        // gallery EditText change listener
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.key_gallery_name)));
-
-        // notification preference change listener
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.key_notifications_new_message_ringtone)));
-
-        // feedback preference click listener
-        Preference myPref = findPreference(getString(R.string.key_send_feedback));
-        myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                sendFeedback(getActivity());
-                return true;
-            }
-        });
     }
-}
+
+    public static class MainPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_main);
+
+            // gallery EditText change listener
+            bindPreferenceSummaryToValue(findPreference(getString(R.string.key_gallery_name)));
+
+            // notification preference change listener
+            bindPreferenceSummaryToValue(findPreference(getString(R.string.key_notifications_new_message_ringtone)));
+
+            // feedback preference click listener
+            Preference myPref = findPreference(getString(R.string.key_send_feedback));
+            myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                public boolean onPreferenceClick(Preference preference) {
+                    sendFeedback(getActivity());
+                    return true;
+                }
+            });
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -150,7 +150,7 @@ public static class MainPreferenceFragment extends PreferenceFragment {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"cruz.p@northeastern.edu"});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Query from PetSpace App");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from PetSpace App User");
         intent.putExtra(Intent.EXTRA_TEXT, body);
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.choose_email_client)));
     }

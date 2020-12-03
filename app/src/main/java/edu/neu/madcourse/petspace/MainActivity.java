@@ -153,17 +153,8 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        //recyclerview and its properties
-        recyclerView = view.findViewById(R.id.all_posts_feed);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-
-        modelPosts = new ArrayList<>();
-        loadPosts();
-
         // Display bottom navigation bar upon loading.
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -181,12 +172,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.Chat:
 
-                        SendUserToChatForumActivity();
+                        SendUserToChatForumOption();
 
                         break;
-                    case R.id.Profile:
+                    case R.id.Nearby:
 
-                        SendUserToProfileActivity();
+                        SendUserToMapNearbyActivity();
 
                         break;
                     case R.id.Settings:
@@ -454,6 +445,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.home:
 
@@ -481,17 +473,21 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.Chat:
 
-                SendUserToChatForumActivity();
+                SendUserToChatForumOption();
 
                 break;
+            case R.id.Nearby:
 
+                SendUserToMapNearbyActivity();
+
+                break;
             case R.id.Profile:
                 SendUserToMainActivity();
 
                 break;
             case R.id.About:
 
-                 SendUserToAboutActivity();
+                SendUserToAboutActivity();
 
                 break;
             case R.id.Settings:
@@ -569,6 +565,15 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    //Method to redirect User to Profile Activity.
+    private void SendUserToChatForumOption() {
+
+        Intent forgotIntent = new Intent(MainActivity.this, ChatForumOption.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
+    }
+
 
     //Method to redirect User toAbout Activity.
     private void RefreshHome() {
@@ -579,19 +584,19 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    //Method to redirect User to SettingsActivity.
-    private void SendUserToChatForumActivity() {
+    //Method to redirect User to ChatMessagingActivity.
+    private void SendUserToChatMessagingActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, ChatForumOption.class);
+        Intent forgotIntent =new Intent(MainActivity.this, ChatMessagingActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();
     }
 
     //Method to redirect User to MessagingActivity.
-    private void SendUserToMessagingActivity() {
+    private void SendUserToMapNearbyActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, MessagingActivity.class);
+        Intent forgotIntent =new Intent(MainActivity.this, MapNearbyActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();

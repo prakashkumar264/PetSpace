@@ -1,12 +1,13 @@
 package edu.neu.madcourse.petspace;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,9 +21,9 @@ import java.util.Random;
 // Tutorial:
 // Scaledrone Chat
 
-public class ChatMessagingActivity extends AppCompatActivity implements RoomListener {
+public class ChatMessagingActivity_dogs extends AppCompatActivity implements RoomListener {
 
-    private String channelID = "V5VvfiClAcbxj2lm";
+    private String channelID = "OkjrJxtQ08Q3niFV";
     private String roomName = "observable-room";
     private EditText editText;
     private Scaledrone scaledrone;
@@ -32,7 +33,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_messaging);
+        setContentView(R.layout.activity_chat_messaging_dogs);
 
         editText = (EditText) findViewById(R.id.editText);
         messageAdapter = new ChatMessageAdapter(this);
@@ -46,7 +47,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
             @Override
             public void onOpen() {
                 System.out.println("PetSpace Messaging connection open");
-                scaledrone.subscribe(roomName, ChatMessagingActivity.this);
+                scaledrone.subscribe(roomName, ChatMessagingActivity_dogs.this);
             }
 
             @Override
@@ -76,8 +77,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
 
     @Override
     public void onOpen(Room room) {
-        System.out.println("Conneted to room");
-        Toast.makeText(ChatMessagingActivity.this, "Welcome to the PetSpace Chat Forum Cats!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ChatMessagingActivity_dogs.this, "Welcome to the PetSpace Chat Forum Dogs!!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -129,22 +129,22 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
      */
     public void onClickCancel(View view) {
         //Sending User back to MainActivity.
-        Intent loginIntent = new Intent(ChatMessagingActivity.this, MainActivity.class);
+        Intent loginIntent = new Intent(ChatMessagingActivity_dogs.this, MainActivity.class);
         startActivity(loginIntent);
     }
 
 }
 
-class MemberData {
+class MemberData_dogs {
     private String name;
     private String color;
 
-    public MemberData(String name, String color) {
+    public MemberData_dogs(String name, String color) {
         this.name = name;
         this.color = color;
     }
 
-    public MemberData() {
+    public MemberData_dogs() {
     }
 
     public String getName() {
@@ -157,7 +157,7 @@ class MemberData {
 
     @Override
     public String toString() {
-        return "MemberData{" +
+        return "MemberData_dogs{" +
                 "name='" + name + '\'' +
                 ", color='" + color + '\'' +
                 '}';
