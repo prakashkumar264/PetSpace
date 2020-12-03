@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.Nearby:
 
-                        SendUserToMapNearbyActivity();
+                        SendUserToMapsMarkerActivity();
 
                         break;
                     case R.id.Settings:
@@ -478,7 +478,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.Nearby:
 
-                SendUserToMapNearbyActivity();
+                SendUserToMapsMarkerActivity();
 
                 break;
             case R.id.Profile:
@@ -594,9 +594,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Method to redirect User to MessagingActivity.
-    private void SendUserToMapNearbyActivity() {
+    private void SendUserToMapsMarkerActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, MapNearbyActivity.class);
+        Intent forgotIntent =new Intent(MainActivity.this, MapsMarkerActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();
