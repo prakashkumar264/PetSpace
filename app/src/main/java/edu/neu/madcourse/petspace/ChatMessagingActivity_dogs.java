@@ -77,7 +77,7 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
 
     @Override
     public void onOpen(Room room) {
-        Toast.makeText(ChatMessagingActivity_dogs.this, "Welcome to the PetSpace Chat Forum Dogs!!", Toast.LENGTH_SHORT).show();
+        System.out.println("Connection to (Dogs Chat Forum) room: Active");
     }
 
     @Override
@@ -133,33 +133,4 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
         startActivity(loginIntent);
     }
 
-}
-
-class MemberData_dogs {
-    private String name;
-    private String color;
-
-    public MemberData_dogs(String name, String color) {
-        this.name = name;
-        this.color = color;
-    }
-
-    public MemberData_dogs() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    @Override
-    public String toString() {
-        return "MemberData_dogs{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                '}';
-    }
 }

@@ -76,8 +76,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
 
     @Override
     public void onOpen(Room room) {
-        System.out.println("Conneted to room");
-        Toast.makeText(ChatMessagingActivity.this, "Welcome to the PetSpace Chat Forum Cats!", Toast.LENGTH_SHORT).show();
+        System.out.println("Connection to (Cats Chat Forum) room: Active");
     }
 
     @Override
