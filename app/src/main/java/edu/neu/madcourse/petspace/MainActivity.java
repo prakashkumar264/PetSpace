@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -53,6 +54,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import edu.neu.madcourse.petspace.adapters.AdapterPosts;
+import edu.neu.madcourse.petspace.data.Posts;
 import edu.neu.madcourse.petspace.data.model.ModelPost;
 import edu.neu.madcourse.petspace.ui.login.ForgotPasswordActivity;
 import edu.neu.madcourse.petspace.ui.login.LoginActivity;
@@ -100,23 +102,11 @@ public class MainActivity extends AppCompatActivity {
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-
-
-
         // Get the application context
         mContext = getApplicationContext();
 
         // Get the activity
         mActivity = MainActivity.this;
-
-        // Get the widgets reference from XML layout
-//        mToolbar = (Toolbar) findViewById(R.id.toolbarAbout);
-
-        // Set a title for toolbar
-//        mToolbar.setTitle("PetSpace");
-        //mToolbar.setTitleTextColor(Color.WHITE);
-//        getSupportActionBar().setIcon(R.drawable.ic_baseline_reorder_24);
-//        getSupportActionBar().setTitle("PetSpace");
 
         // firebase Instance
         mAuth = FirebaseAuth.getInstance();
@@ -233,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void loadPosts() {
         DatabaseReference ref = PostRef;
         ref.addValueEventListener(new ValueEventListener() {
@@ -258,9 +249,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void uploadData(String content, String valueOf) {
         String timestamp = String.valueOf(System.currentTimeMillis());
-        String filePathAndName = "Posts/" + "post_" + timestamp;
+
+
+        String filePathAndName = "Users/Posts/" + "post_" + timestamp;
+
+
         if(!valueOf.equals("noImage")){
+
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(filePathAndName);
+
+
             storageReference.putFile(Uri.parse(valueOf))
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -277,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
                                 hashMap.put("pimage", downloadUri);
                                 hashMap.put("ptime", timestamp );
 
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users/Posts");
                                 reference.child(timestamp).setValue(hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -295,9 +293,6 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
                             }
-
-
-
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -510,6 +505,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+
 
 
 
