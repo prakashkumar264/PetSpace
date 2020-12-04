@@ -25,51 +25,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:text="@string/choose_a_chat_forums"
+        android:text="@string/choose_a_chat_forum"
 
-        android:textAlignment="center"
         android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/dog_forum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="210dp"
         android:layout_below="@id/cat_forum"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/roundshape_button"
+        android:drawableBottom="@drawable/dog_chat"
         android:onClick="onClickDogsChat"
         android:padding="15dp"
-        android:text="@string/dogs_chat"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:visibility="visible"
+        />
 
     <Button
         android:id="@+id/cat_forum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="210dp"
         android:layout_below="@id/textViewChatForumOption"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
-        android:onClick="onClickCatsChat"
         android:background="@drawable/roundshape_button"
+        android:drawableBottom="@drawable/cat_chat"
+        android:onClick="onClickCatsChat"
         android:padding="15dp"
-        android:text="@string/cats_chat"
         android:textColor="@android:color/white"
         android:visibility="visible" />
 
-    <Button
-        android:id="@+id/cancel_back_to_main"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dog_forum"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="15dp"
-        android:onClick="onClickCancel"
-        android:background="@drawable/roundshape_button"
-        android:padding="15dp"
-        android:text="@string/back_to_main"
-        android:textColor="@android:color/white" />
+        android:layout_height="224dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-191dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/ic_baseline_home_24"
+            android:onClick="onClickCancel"
+            android:padding="20dp" />
+    </LinearLayout>
+
 </RelativeLayout>

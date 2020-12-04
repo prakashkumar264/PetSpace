@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +36,9 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 
 
@@ -49,6 +54,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
     private String Current_UserId;
     private ImageButton Add_Photo;
     public static final String Firebase_Server_URL = "https://petspace-2c47c.firebaseio.com/";
+    private StorageReference mStorageRef;
+    private ImageView img;
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -59,16 +67,12 @@ public class ProfileSetupActivity extends AppCompatActivity {
         save_profile_info = findViewById(R.id.save_profile_info);
         mAuth = FirebaseAuth.getInstance();
 
+        img=(ImageView)findViewById(R.id.profile_img);
         Current_UserId = mAuth.getCurrentUser().getUid();
-
-
-//        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-//        DatabaseReference uidRef = rootRef.child("Users").child(uid);
-//        DatabaseReference reference = uidRef.child("Posts").child(uid);
-
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("profileImage");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         user_name = findViewById(R.id.user_name);
         full_name = findViewById(R.id.full_name);
@@ -79,9 +83,17 @@ public class ProfileSetupActivity extends AppCompatActivity {
         Profile_Img = findViewById(R.id.profile_img);
         Add_Photo = findViewById(R.id.add_image);
 
+        if (user != null) {
+            Uri photoUrl = user.getPhotoUrl();
+            Glide.with(this).load(photoUrl).into(img);
+
+        }
+
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+
                 EditText user_name = (EditText) findViewById(R.id.user_name);
                 user_name.setText(dataSnapshot.child("username").getValue(String.class));
 
@@ -201,11 +213,11 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
         Users_Ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
-                    if(dataSnapshot.hasChild("profileImage")) {
-                        String image = dataSnapshot.child("profileImage").getValue().toString();
+                    if(dataSnapshot.hasChild("/profileImage")) {
+                        String image = dataSnapshot.child("/profileImage").getValue().toString();
                         Picasso.get()
                                 .load(image)
                                 .placeholder(R.drawable.profile)
@@ -239,8 +251,8 @@ public class ProfileSetupActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
-                    if(dataSnapshot.hasChild("profileImage")) {
-                        String image = dataSnapshot.child("profileImage").getValue().toString();
+                    if(dataSnapshot.hasChild("/profileImage")) {
+                        String image = dataSnapshot.child("/profileImage").getValue().toString();
                         Picasso.get()
                                 .load(image)
                                 .placeholder(R.drawable.profile)

@@ -3,16 +3,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_Edit"
-        android:title="Edit"
-        >
+        android:id="@+id/nav_post_addfriend"
+        android:title="Add Pet Friend">
 
     </item>
 
     <item
         android:id="@+id/nav_Delete"
         android:checkable="false"
-        android:title="Delete"
-        >
-    </item>
+        android:title="View Profile"></item>
 </menu>
