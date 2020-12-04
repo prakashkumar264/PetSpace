@@ -510,6 +510,15 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+
+
+
+    }
+
+
+    private void openPopUpWindow() {
+        Intent popupwindow = new Intent (MainActivity.this,PopUpWindow.class);
+        startActivity(popupwindow);
     }
 
     // Method to send user to ProfileSetupActivity screen to edit profile.
