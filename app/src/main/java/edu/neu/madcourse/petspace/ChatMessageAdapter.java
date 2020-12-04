@@ -52,20 +52,24 @@ public class ChatMessageAdapter extends BaseAdapter {
 
         if (message.isBelongsToCurrentUser()) {
             convertView = messageInflater.inflate(R.layout.chat_my_message, null);
-            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
-            convertView.setTag(holder);
-            holder.messageBody.setText(message.getText());
-        } else {
-            convertView = messageInflater.inflate(R.layout.chat_their_message, null);
-            holder.avatar = (View) convertView.findViewById(R.id.avatar);
+            holder.avatar = (View) convertView.findViewById(R.id.profile_img);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
             holder.name.setText(message.getMemberData().getName());
             holder.messageBody.setText(message.getText());
-            GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
-            drawable.setColor(Color.parseColor(message.getMemberData().getColor()));
+
+
+        } else {
+            convertView = messageInflater.inflate(R.layout.chat_their_message, null);
+            holder.avatar = (View) convertView.findViewById(R.id.profile_img);
+            holder.name = (TextView) convertView.findViewById(R.id.name);
+            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
+            convertView.setTag(holder);
+
+            holder.name.setText(message.getMemberData().getName());
+            holder.messageBody.setText(message.getText());
         }
 
         return convertView;

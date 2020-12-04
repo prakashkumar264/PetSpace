@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -166,6 +168,14 @@ public class ProfileSetupActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(ProfileSetupActivity.this,"Account Information Saved!",Toast.LENGTH_LONG);
+
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(username).build();
+
+                                user.updateProfile(profileUpdates);
+
                                 SendUserToMainActivity();
                             }
                             else {

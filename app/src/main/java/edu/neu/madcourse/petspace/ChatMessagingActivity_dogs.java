@@ -11,6 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.scaledrone.lib.Listener;
 import com.scaledrone.lib.Room;
 import com.scaledrone.lib.RoomListener;
@@ -30,6 +37,12 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
     private ChatMessageAdapter messageAdapter;
     private ListView messagesView;
 
+    FirebaseAuth mAuth;
+    private DatabaseReference Users_Ref, UserRef;
+    private DatabaseReference Username;
+    private StorageReference UserProfileImageRef;
+    private String Current_UserId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +53,32 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
 
-        MemberData data = new MemberData(getRandomName(), getRandomColor());
+        mAuth = FirebaseAuth.getInstance();
+
+        Current_UserId = mAuth.getCurrentUser().getUid();
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String display_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
+        Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
+        String usernameRef = display_name.toString();
+
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                EditText user_name = (EditText) findViewById(R.id.user_name);
+                user_name.setText(dataSnapshot.child("username").getValue(String.class));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        MemberData data = new MemberData(usernameRef, getRandomColor());
 
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {
