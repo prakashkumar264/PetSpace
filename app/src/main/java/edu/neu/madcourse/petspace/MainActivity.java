@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         String timestamp = String.valueOf(System.currentTimeMillis());
 
 
-        String filePathAndName = "Users/Posts/" + "post_" + timestamp;
+        String filePathAndName = "Posts/" + "post_" + timestamp;
 
 
         if(!valueOf.equals("noImage")){
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
                                 hashMap.put("pimage", downloadUri);
                                 hashMap.put("ptime", timestamp );
 
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users/Posts");
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
                                 reference.child(timestamp).setValue(hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
