@@ -28,7 +28,9 @@
         <activity android:name=".NotificationsActivity" />
         <activity android:name=".MessagingActivity" />
         <activity android:name=".ChatMessagingActivity" />
-        <activity android:name=".MapsMarkerActivity" />
+        <activity
+            android:name=".MapsMarkerActivity"
+            android:label="@string/title_activity_maps" />
         <activity android:name=".ChatMessagingActivity_dogs" />
         <activity android:name=".SettingsHeadersActivity" />
         <activity android:name=".FriendRequestsActivity" />
