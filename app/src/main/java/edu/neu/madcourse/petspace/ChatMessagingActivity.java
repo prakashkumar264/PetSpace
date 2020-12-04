@@ -75,8 +75,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                EditText user_name = (EditText) findViewById(R.id.user_name);
-                user_name.setText(dataSnapshot.child("username").getValue(String.class));
+
 
             }
 

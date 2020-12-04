@@ -69,8 +69,7 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                EditText user_name = (EditText) findViewById(R.id.user_name);
-                user_name.setText(dataSnapshot.child("username").getValue(String.class));
+
 
             }
 
