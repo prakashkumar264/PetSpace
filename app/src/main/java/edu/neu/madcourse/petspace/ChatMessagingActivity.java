@@ -2,14 +2,25 @@ package edu.neu.madcourse.petspace;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -40,13 +51,12 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
     private Scaledrone scaledrone;
     private ChatMessageAdapter messageAdapter;
     private ListView messagesView;
-
-    FirebaseAuth mAuth;
     private DatabaseReference Users_Ref, UserRef;
     private DatabaseReference Username;
     private StorageReference UserProfileImageRef;
     private String Current_UserId;
-
+    private ImageButton popup_button;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +68,17 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
 
-
         mAuth = FirebaseAuth.getInstance();
-
         Current_UserId = mAuth.getCurrentUser().getUid();
-
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String display_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-
         Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
         String usernameRef = display_name.toString();
 
-        ValueEventListener eventListener = new ValueEventListener() {
+            ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -80,7 +86,8 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+            }
         };
 
         MemberData data = new MemberData(usernameRef, getRandomColor());
@@ -109,7 +116,6 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
         });
 
     }
-
     public void sendMessage(View view) {
         String message = editText.getText().toString();
         if (message.length() > 0) {
@@ -155,6 +161,8 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
                         "_" +
                         nouns[(int) Math.floor(Math.random() * nouns.length)]
         );
+
+
     }
 
     private String getRandomColor() {

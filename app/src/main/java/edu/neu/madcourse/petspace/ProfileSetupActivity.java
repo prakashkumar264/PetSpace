@@ -23,8 +23,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,9 +34,6 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 
 
@@ -47,16 +42,13 @@ public class ProfileSetupActivity extends AppCompatActivity {
     final static int GalleryPic=1;
     FirebaseAuth mAuth;
     private DatabaseReference Users_Ref;
-    private StorageReference UserProfileImageRef;
+    private StorageReference UserProfileImageRef, Imageref;
     private Button save_profile_info;
     private EditText user_name, full_name, city_origin, state_origin, country_origin, profile_bio;
     private ImageView Profile_Img;
     private String Current_UserId;
     private ImageButton Add_Photo;
     public static final String Firebase_Server_URL = "https://petspace-2c47c.firebaseio.com/";
-    private StorageReference mStorageRef;
-    private ImageView img;
-    private DatabaseReference mDatabase;
 
 
     @Override
@@ -67,12 +59,16 @@ public class ProfileSetupActivity extends AppCompatActivity {
         save_profile_info = findViewById(R.id.save_profile_info);
         mAuth = FirebaseAuth.getInstance();
 
-        img=(ImageView)findViewById(R.id.profile_img);
         Current_UserId = mAuth.getCurrentUser().getUid();
+
+
+//        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference uidRef = rootRef.child("Users").child(uid);
+//        DatabaseReference reference = uidRef.child("Posts").child(uid);
+
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("profileImage");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         user_name = findViewById(R.id.user_name);
         full_name = findViewById(R.id.full_name);
@@ -83,50 +79,10 @@ public class ProfileSetupActivity extends AppCompatActivity {
         Profile_Img = findViewById(R.id.profile_img);
         Add_Photo = findViewById(R.id.add_image);
 
-        if (user != null) {
-            Uri photoUrl = user.getPhotoUrl();
-            Glide.with(this).load(photoUrl).into(img);
-
-        }
-
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                EditText user_name = (EditText) findViewById(R.id.user_name);
-                user_name.setText(dataSnapshot.child("username").getValue(String.class));
-
-                EditText full_name = (EditText) findViewById(R.id.full_name);
-                full_name.setText(dataSnapshot.child("fullname").getValue(String.class));
-
-                EditText city_origin = (EditText) findViewById(R.id.city_origin);
-                city_origin.setText(dataSnapshot.child("city").getValue(String.class));
-
-                EditText state_origin = (EditText) findViewById(R.id.state_origin);
-                state_origin.setText(dataSnapshot.child("state").getValue(String.class));
-
-                EditText country_origin = (EditText) findViewById(R.id.country_origin);
-                country_origin.setText(dataSnapshot.child("country").getValue(String.class));
-
-                EditText profile_bio = (EditText) findViewById(R.id.profile_bio);
-                profile_bio.setText(dataSnapshot.child("profilebio").getValue(String.class));
-
-                ImageView profile_img = (ImageView) findViewById(R.id.profile_img);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        };
-
 //        String usid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 //        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 //        DatabaseReference uidRef = rootRef.child("Users").child(usid);
 //        DatabaseReference reference = uidRef.child("profileImage").child(uid);
-
-
-        Users_Ref.addListenerForSingleValueEvent(eventListener);
 
         save_profile_info.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -180,14 +136,6 @@ public class ProfileSetupActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(ProfileSetupActivity.this,"Account Information Saved!",Toast.LENGTH_LONG);
-
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(username).build();
-
-                                user.updateProfile(profileUpdates);
-
                                 SendUserToMainActivity();
                             }
                             else {
@@ -213,16 +161,40 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
         Users_Ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
-                    if(dataSnapshot.hasChild("/profileImage")) {
-                        String image = dataSnapshot.child("/profileImage").getValue().toString();
+                    if(dataSnapshot.hasChild("profileImage")) {
+
+                        String image_ref = UserProfileImageRef.toString();
+                        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(image_ref);
+                        String image_ref2 = ref.toString();
+
+                        String image = dataSnapshot.child("profileImage").getValue().toString();
+
                         Picasso.get()
-                                .load(image)
+                                .load(image_ref2)
                                 .placeholder(R.drawable.profile)
                                 .into(Profile_Img);
                     }
+
+                    EditText user_name = (EditText) findViewById(R.id.user_name);
+                    user_name.setText(dataSnapshot.child("username").getValue(String.class));
+
+                    EditText full_name = (EditText) findViewById(R.id.full_name);
+                    full_name.setText(dataSnapshot.child("fullname").getValue(String.class));
+
+                    EditText city_origin = (EditText) findViewById(R.id.city_origin);
+                    city_origin.setText(dataSnapshot.child("city").getValue(String.class));
+
+                    EditText state_origin = (EditText) findViewById(R.id.state_origin);
+                    state_origin.setText(dataSnapshot.child("state").getValue(String.class));
+
+                    EditText country_origin = (EditText) findViewById(R.id.country_origin);
+                    country_origin.setText(dataSnapshot.child("country").getValue(String.class));
+
+                    EditText profile_bio = (EditText) findViewById(R.id.profile_bio);
+                    profile_bio.setText(dataSnapshot.child("profilebio").getValue(String.class));
                 }
                 else
                 {
@@ -251,8 +223,10 @@ public class ProfileSetupActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
-                    if(dataSnapshot.hasChild("/profileImage")) {
-                        String image = dataSnapshot.child("/profileImage").getValue().toString();
+                    if(dataSnapshot.hasChild("profileImage")) {
+
+
+                        String image = dataSnapshot.child("profileImage").getValue().toString();
                         Picasso.get()
                                 .load(image)
                                 .placeholder(R.drawable.profile)
