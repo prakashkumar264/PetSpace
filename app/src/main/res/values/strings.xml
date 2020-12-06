@@ -218,5 +218,7 @@
     <string name="option_get_place">Get place</string>
     <string name="pick_place">Choose a place</string>
     <string name="like">likes</string>
+    <string name="_12_00">12:00</string>
+    <string name="_05_december_2020">05-December-2020</string>
 
 </resources>
