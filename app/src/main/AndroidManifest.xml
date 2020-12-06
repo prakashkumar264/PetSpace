@@ -17,7 +17,7 @@
         android:roundIcon="@drawable/pets_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".ChatForumOption" />
         <activity android:name=".FriendRequestOptionActivity" />
         <activity
@@ -62,19 +62,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--
-        The API key for Google Maps-based APIs.
-         -->
+        <!--         The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_api_key" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
     </application>
-
 
 </manifest>

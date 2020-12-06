@@ -1,27 +1,16 @@
 package edu.neu.madcourse.petspace;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,8 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.scaledrone.lib.Listener;
 import com.scaledrone.lib.Room;
 import com.scaledrone.lib.RoomListener;
@@ -53,10 +40,10 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
     private ListView messagesView;
     private DatabaseReference Users_Ref, UserRef;
     private DatabaseReference Username;
-    private StorageReference UserProfileImageRef;
     private String Current_UserId;
     private ImageButton popup_button;
     FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +58,14 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
         mAuth = FirebaseAuth.getInstance();
         Current_UserId = mAuth.getCurrentUser().getUid();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String display_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-
         String usernameRef = display_name.toString();
 
             ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
 
             }
 
@@ -122,11 +106,23 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
             scaledrone.publish(roomName, message);
             editText.getText().clear();
         }
+
+//                    Set date:
+//                    String date_n = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(new Date());
+//                    TextView date  = (TextView) findViewById(R.id.post_date);
+//                    date.setText(date_n);
+//                    // Set time:
+//                    String curDateTime = DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
+//                    ((TextView)findViewById(R.id.post_time)).setText(curDateTime);
+
+
+
     }
 
     @Override
     public void onOpen(Room room) {
         System.out.println("Connection to (Cats Chat Forum) room: Active");
+
     }
 
     @Override
@@ -146,6 +142,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
                 public void run() {
                     messageAdapter.add(message);
                     messagesView.setSelection(messagesView.getCount() - 1);
+
                 }
             });
         } catch (JsonProcessingException e) {
@@ -214,4 +211,30 @@ class MemberData {
                 ", color='" + color + '\'' +
                 '}';
     }
+}
+    class PostViewHolder extends RecyclerView.ViewHolder {
+
+        View mView;
+        DatabaseReference LikesRef, FavoritesRef, PostRef;
+        ImageView Like;
+        ImageView Favorite;
+        TextView Date, Time;
+
+        public PostViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+
+            //Instantiating Like,Comment,Share widgets
+            Like = mView.findViewById(R.id.post_like);
+            Favorite = mView.findViewById(R.id.post_favorite);
+            Date = mView.findViewById(R.id.post_date);
+            Time = mView.findViewById(R.id.post_time);
+
+            PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+            LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+            FavoritesRef = FirebaseDatabase.getInstance().getReference().child("Favorites");
+
+        }
+
+
 }

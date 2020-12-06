@@ -2,8 +2,6 @@ package edu.neu.madcourse.petspace;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +50,8 @@ public class ChatMessageAdapter extends BaseAdapter {
 
         if (message.isBelongsToCurrentUser()) {
             convertView = messageInflater.inflate(R.layout.chat_my_message, null);
-            holder.avatar = (View) convertView.findViewById(R.id.profile_img);
-            holder.name = (TextView) convertView.findViewById(R.id.name);
+            holder.avatar = (View) convertView.findViewById(R.id.post_profile_img);
+            holder.name = (TextView) convertView.findViewById(R.id.post_user_name);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
@@ -63,8 +61,8 @@ public class ChatMessageAdapter extends BaseAdapter {
 
         } else {
             convertView = messageInflater.inflate(R.layout.chat_their_message, null);
-            holder.avatar = (View) convertView.findViewById(R.id.profile_img);
-            holder.name = (TextView) convertView.findViewById(R.id.name);
+            holder.avatar = (View) convertView.findViewById(R.id.post_profile_img);
+            holder.name = (TextView) convertView.findViewById(R.id.post_user_name);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
