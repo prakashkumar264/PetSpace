@@ -221,6 +221,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        recyclerView = findViewById(R.id.all_posts_feed);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        modelPosts = new ArrayList<>();
+        loadPosts();
+
     }
 
 
@@ -236,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
                     modelPosts.add(modelPost);
 
                     adapterPosts = new AdapterPosts(MainActivity.this, modelPosts);
+
                     recyclerView.setAdapter(adapterPosts);
                 }
             }
