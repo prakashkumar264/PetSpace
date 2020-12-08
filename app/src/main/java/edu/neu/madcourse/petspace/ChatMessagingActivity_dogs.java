@@ -54,31 +54,25 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
         messagesView.setAdapter(messageAdapter);
 
         mAuth = FirebaseAuth.getInstance();
-
         Current_UserId = mAuth.getCurrentUser().getUid();
-
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String display_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-
-        Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-
         String usernameRef = display_name.toString();
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+            }
         };
 
         MemberData data = new MemberData(usernameRef, getRandomColor());
-
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {
             @Override
@@ -102,19 +96,31 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
                 System.err.println(reason);
             }
         });
-    }
 
+    }
     public void sendMessage(View view) {
         String message = editText.getText().toString();
         if (message.length() > 0) {
             scaledrone.publish(roomName, message);
             editText.getText().clear();
         }
+
+//                    Set date:
+//                    String date_n = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(new Date());
+//                    TextView date  = (TextView) findViewById(R.id.post_date);
+//                    date.setText(date_n);
+//                    // Set time:
+//                    String curDateTime = DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
+//                    ((TextView)findViewById(R.id.post_time)).setText(curDateTime);
+
+
+
     }
 
     @Override
     public void onOpen(Room room) {
-        System.out.println("Connection to (Dogs Chat Forum) room: Active");
+        System.out.println("Connection to (Cats Chat Forum) room: Active");
+
     }
 
     @Override
@@ -134,6 +140,7 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
                 public void run() {
                     messageAdapter.add(message);
                     messagesView.setSelection(messagesView.getCount() - 1);
+
                 }
             });
         } catch (JsonProcessingException e) {
@@ -149,6 +156,8 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
                         "_" +
                         nouns[(int) Math.floor(Math.random() * nouns.length)]
         );
+
+
     }
 
     private String getRandomColor() {
