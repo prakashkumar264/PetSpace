@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -21,6 +29,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import edu.neu.madcourse.petspace.MainActivity;
+import edu.neu.madcourse.petspace.ProfileSetupActivity;
 import edu.neu.madcourse.petspace.R;
 import edu.neu.madcourse.petspace.data.model.ModelPost;
 
@@ -51,14 +61,38 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         Calendar calendar  = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(ptimestamp));
         String ptime = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
+        DatabaseReference Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        Users_Ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    holder.uNameTv.setText(dataSnapshot.child("username").getValue(String.class));
+                    String image = dataSnapshot.child("profileImage").getValue().toString();
 
+
+                    Picasso.get()
+                            .load(String.valueOf(image))
+                            .placeholder(R.drawable.profile)
+                            .error(R.drawable.profile)
+                            .into(holder.uPictureTv);
+                }
+                else
+                {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         holder.pContentTv.setText(pcontent);
         holder.uTimeTv.setText(ptime);
-        holder.uNameTv.setText(uid);
+
 
         if(pimage.equals("noImage")){
             holder.pImageTv.setVisibility(View.GONE);
-
         }else{
             try{
                 Picasso.get().load(pimage).into(holder.pImageTv);
@@ -89,7 +123,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         return postList.size();
     }
 
-    class MyHolder extends RecyclerView.ViewHolder{
+    static class MyHolder extends RecyclerView.ViewHolder{
 
         ImageView uPictureTv, pImageTv;
         TextView uNameTv, uTimeTv, pContentTv, pLikesTv;

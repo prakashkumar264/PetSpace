@@ -38,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -134,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
         btn_post = findViewById(R.id.add_new_post_button);
         btn_upload = findViewById(R.id.add_new_upload_button);
 
+
+
         // Set actionbar with toolbar
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -225,9 +228,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
-
         recyclerView.setLayoutManager(layoutManager);
-
         modelPosts = new ArrayList<>();
         loadPosts();
 
@@ -242,12 +243,10 @@ public class MainActivity extends AppCompatActivity {
                 modelPosts.clear();
                 for(DataSnapshot ds: snapshot.getChildren()){
                     ModelPost modelPost = ds.getValue(ModelPost.class);
-
                     modelPosts.add(modelPost);
-
                     adapterPosts = new AdapterPosts(MainActivity.this, modelPosts);
-
                     recyclerView.setAdapter(adapterPosts);
+                    adapterPosts.notifyDataSetChanged();
                 }
             }
 
