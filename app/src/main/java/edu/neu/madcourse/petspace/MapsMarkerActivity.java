@@ -101,7 +101,7 @@ public class MapsMarkerActivity extends AppCompatActivity
 
         // Search for 'Pets'
         // Markers at Pet associated places
-        
+
     }
     // [END maps_marker_on_map_ready_add_marker]
 }
