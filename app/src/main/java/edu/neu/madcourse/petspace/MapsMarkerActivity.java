@@ -98,6 +98,10 @@ public class MapsMarkerActivity extends AppCompatActivity
         // [START_EXCLUDE silent]
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         // [END_EXCLUDE]
+
+        // Search for 'Pets'
+        // Markers at Pet associated places
+        
     }
     // [END maps_marker_on_map_ready_add_marker]
 }
