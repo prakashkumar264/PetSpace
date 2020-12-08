@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.scaledrone.lib.Listener;
 import com.scaledrone.lib.Room;
 import com.scaledrone.lib.RoomListener;
@@ -38,11 +39,12 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
     private Scaledrone scaledrone;
     private ChatMessageAdapter messageAdapter;
     private ListView messagesView;
+
+    FirebaseAuth mAuth;
     private DatabaseReference Users_Ref, UserRef;
     private DatabaseReference Username;
+    private StorageReference UserProfileImageRef;
     private String Current_UserId;
-    private ImageButton popup_button;
-    FirebaseAuth mAuth;
 
 
     @Override

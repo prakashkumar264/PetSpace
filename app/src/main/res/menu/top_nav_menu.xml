@@ -49,9 +49,9 @@
 
             <item
                 android:id="@+id/Nearby"
-                android:icon="@drawable/ic_baseline_chat_24"
+                android:icon="@drawable/ic_baseline_map_24"
                 android:orderInCategory="5"
-                android:title="@string/messages"
+                android:title="@string/Nearby"
                 app:showAsAction="never" />
 
             <item
