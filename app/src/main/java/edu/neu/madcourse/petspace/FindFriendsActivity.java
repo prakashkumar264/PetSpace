@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FindFriendsActivity extends AppCompatActivity {
@@ -31,7 +34,7 @@ public class FindFriendsActivity extends AppCompatActivity {
     private EditText SearchInputText;
     private RecyclerView SearchList;
     private ImageButton Back;
-    private DatabaseReference AllUsersRef;
+    private DatabaseReference AllUsersRef, Users;
     private String CurrentUserId;
     private FirebaseAuth mAuth;
     private ImageButton SearchFriendsButton;
@@ -64,10 +67,10 @@ public class FindFriendsActivity extends AppCompatActivity {
 
                 String searchBoxInput =SearchInputText.getText().toString();
 
-                // Hide Keyboard
-                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
+//                // Hide Keyboard
+//                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+//                        InputMethodManager.HIDE_NOT_ALWAYS);
                 SearchFriends(searchBoxInput);
 
             }
@@ -76,11 +79,6 @@ public class FindFriendsActivity extends AppCompatActivity {
     }
 
     private void SearchFriends(String searchBoxInput) {
-
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference uidRef = rootRef.child("Users").child(uid);
-        DatabaseReference AllUsersRef = uidRef.child("fullname").child(uid);
 
         FirebaseRecyclerOptions<FindFriendsObject> options =
                 new FirebaseRecyclerOptions.Builder<FindFriendsObject>()
@@ -172,4 +170,3 @@ public class FindFriendsActivity extends AppCompatActivity {
     }
 
 }
-

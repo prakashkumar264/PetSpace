@@ -69,7 +69,7 @@ public class MapsMarkerActivity extends AppCompatActivity
 
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
-    private final LatLng defaultLocation = new LatLng(47.606209, -122.332069);
+    private final LatLng defaultLocation = new LatLng(47.6062, 122.3321);
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
@@ -124,6 +124,12 @@ public class MapsMarkerActivity extends AppCompatActivity
         mapFragment.getMapAsync(this);
         // [END maps_current_place_map_fragment]
         // [END_EXCLUDE]
+
+//        MapsMarkerActivity.this.openPlacesDialog();
+
+        MapsMarkerActivity.this.showCurrentPlace();
+
+
     }
     // [END maps_current_place_on_create]
 

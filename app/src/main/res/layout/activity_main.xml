@@ -54,17 +54,17 @@
                 android:layout_gravity="bottom|end"
                 android:gravity="end"></include>
 
-            <androidx.recyclerview.widget.RecyclerView
 
-                android:id="@+id/all_posts_feed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:scrollbars="vertical" />
 
 
         </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
 
+            android:id="@+id/all_posts_feed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:scrollbars="vertical" />
     </RelativeLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
