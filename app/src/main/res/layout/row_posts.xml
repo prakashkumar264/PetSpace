@@ -60,6 +60,7 @@
             android:text="The description of post"
             android:textColor="@color/black"
             android:layout_width="match_parent"
+            android:textSize="16sp"
             android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/pImageTv"
@@ -69,9 +70,9 @@
             />
         <TextView
             android:id="@+id/pLikesTv"
-            android:text="1.2K likes"
             android:textColor="@color/black"
             android:layout_width="match_parent"
+            android:textSize="12sp"
             android:layout_height="wrap_content" />
 
         <View

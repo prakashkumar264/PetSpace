@@ -1,6 +1,8 @@
 package edu.neu.madcourse.petspace.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,9 +46,18 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     Context context;
     List<ModelPost> postList;
 
+    String myUid;
+    private DatabaseReference likesRef;
+    private DatabaseReference postsRef;
+
+    boolean mProcessLike = false;
+
     public AdapterPosts(Context context, List<ModelPost> postList) {
         this.context = context;
         this.postList = postList;
+        myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+        postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
     }
 
     @NonNull
@@ -57,6 +73,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         String pcontent = postList.get(i).getPcontent();
         String ptimestamp = postList.get(i).getPtime();
         String pimage = postList.get(i).getPimage();
+        String  pLikes = postList.get(i).getpLikes();
+        String pId = postList.get(i).getPtime();
 
         Calendar calendar  = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(ptimestamp));
@@ -67,14 +85,19 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     holder.uNameTv.setText(dataSnapshot.child("username").getValue(String.class));
-                    String image = dataSnapshot.child("profileImage").getValue().toString();
-
-
-                    Picasso.get()
-                            .load(String.valueOf(image))
-                            .placeholder(R.drawable.profile)
-                            .error(R.drawable.profile)
-                            .into(holder.uPictureTv);
+                    String url = dataSnapshot.child("profileImage").getValue().toString();
+                    String url2 = url.replaceAll("gs://petspace-2c47c.appspot.com/", "");
+                    FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+                    StorageReference storageReference = firebaseStorage.getReference();
+                    StorageReference reference = storageReference.child(url2);
+                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(context)
+                                    .load(uri)
+                                    .into(holder.uPictureTv);
+                        }
+                    });
                 }
                 else
                 {
@@ -89,8 +112,11 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         });
         holder.pContentTv.setText(pcontent);
         holder.uTimeTv.setText(ptime);
-
-
+        if(pLikes == null){
+            pLikes = "0";
+        }
+        holder.pLikesTv.setText(pLikes + " Likes");
+        setLikes(holder, pId);
         if(pimage.equals("noImage")){
             holder.pImageTv.setVisibility(View.GONE);
         }else{
@@ -106,17 +132,60 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         holder.likebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show();
+                int pLikes = Integer.parseInt(postList.get(i).getpLikes());
+                mProcessLike = true;
+                final String postIde = postList.get(i).getPtime();
+                likesRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(mProcessLike){
+                            if(snapshot.child(postIde).hasChild(myUid)){
+                                postsRef.child(postIde).child("pLikes").setValue(""+(pLikes-1));
+                                likesRef.child(postIde).child(myUid).removeValue();
+                                mProcessLike = false;
+                            }else{
+                                postsRef.child(postIde).child("pLikes").setValue(""+(pLikes+1));
+                                likesRef.child(postIde).child(myUid).setValue("Liked");
+                                mProcessLike = false;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show();
             }
         });
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Comment", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Commented", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
+    private void setLikes(final MyHolder holder,final String pId) {
+        likesRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(pId).hasChild(myUid)){
+                    holder.likebtn.setText("Liked");
+                }
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                holder.likebtn.setText("Like");
+            }
+        });
+    }
+
 
     @Override
     public int getItemCount() {

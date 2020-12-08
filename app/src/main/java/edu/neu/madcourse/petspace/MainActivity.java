@@ -284,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
                                 hashMap.put("pcontent", content);
                                 hashMap.put("pimage", downloadUri);
                                 hashMap.put("ptime", timestamp );
+                                hashMap.put("pId", timestamp);
+                                hashMap.put("pLikes", "0");
 
                                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
                                 reference.child(timestamp).setValue(hashMap)
@@ -319,7 +321,8 @@ public class MainActivity extends AppCompatActivity {
             hashMap.put("pcontent", content);
             hashMap.put("pimage", "noImage");
             hashMap.put("ptime", timestamp );
-
+            hashMap.put("pId", timestamp);
+            hashMap.put("pLikes", "0");
             DatabaseReference reference = PostRef;
             reference.child(timestamp).setValue(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -349,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
 
                         requestCameraPermission();
                     }else{
-                        Toast.makeText(MainActivity.this, "Pickfromcamer", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Pickfromcamera", Toast.LENGTH_SHORT).show();
                         PickFromCamera();
                     }
                 }
@@ -357,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
                     if(!checkStoragePermission()){
                         requestStoragePermission();
                     }else{
-                        Toast.makeText(MainActivity.this, "PickfromGAllery", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "PickfromGallery", Toast.LENGTH_SHORT).show();
                         PickFromGallery();
                     }
                 }

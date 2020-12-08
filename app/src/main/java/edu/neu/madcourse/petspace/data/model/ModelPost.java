@@ -1,17 +1,27 @@
 package edu.neu.madcourse.petspace.data.model;
 
 public class ModelPost {
-    String uid,pcontent,pimage, ptime;
+    String pid,uid,pcontent,pimage, ptime, pLikes;
 
     public ModelPost(){
 
     }
 
-    public ModelPost(String uid, String pcontent, String pimage, String ptime) {
+    public ModelPost(String pid, String uid, String pcontent, String pimage, String ptime, String pLikes) {
+        this.pid = pid;
         this.uid = uid;
         this.pcontent = pcontent;
         this.pimage = pimage;
         this.ptime = ptime;
+        this.pLikes = pLikes;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public String getUid() {
@@ -44,5 +54,13 @@ public class ModelPost {
 
     public void setPtime(String ptime) {
         this.ptime = ptime;
+    }
+
+    public String getpLikes() {
+        return pLikes;
+    }
+
+    public void setpLikes(String pLikes) {
+        this.pLikes = pLikes;
     }
 }
