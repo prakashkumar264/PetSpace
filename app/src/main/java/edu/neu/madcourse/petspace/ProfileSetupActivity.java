@@ -2,6 +2,8 @@ package edu.neu.madcourse.petspace;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +31,9 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
+import java.util.List;
+
+import edu.neu.madcourse.petspace.data.model.ModelPost;
 
 
 public class ProfileSetupActivity extends AppCompatActivity {
@@ -41,8 +47,8 @@ public class ProfileSetupActivity extends AppCompatActivity {
     private ImageView Profile_Img;
     private String Current_UserId;
     private ImageButton Add_Photo;
+    Context context;
     public static final String Firebase_Server_URL = "https://petspace-2c47c.firebaseio.com/";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,15 +165,18 @@ public class ProfileSetupActivity extends AppCompatActivity {
                 {
                     if(dataSnapshot.hasChild("profileImage")) {
 
-                        String image = dataSnapshot.child("profileImage").getValue().toString();
+                        String url = dataSnapshot.child("profileImage").getValue().toString();
+                        String url2 = url.replaceAll("gs://petspace-2c47c.appspot.com/", "");
+                        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+                        StorageReference storageReference = firebaseStorage.getReference();
+                        StorageReference reference = storageReference.child(url2);
 
+                        String image = dataSnapshot.child("profileImage").getValue().toString();
                         Picasso.get()
                                 .load(image)
                                 .placeholder(R.drawable.profile)
-                                .error(R.drawable.profile)
                                 .into(Profile_Img);
                     }
-
 
                     EditText user_name = (EditText) findViewById(R.id.user_name);
                     user_name.setText(dataSnapshot.child("username").getValue(String.class));
@@ -187,6 +196,8 @@ public class ProfileSetupActivity extends AppCompatActivity {
                     EditText profile_bio = (EditText) findViewById(R.id.profile_bio);
                     profile_bio.setText(dataSnapshot.child("profilebio").getValue(String.class));
                 }
+
+
                 else
                 {
                     Toast.makeText(ProfileSetupActivity.this,"Please Select A Valid Image!",Toast.LENGTH_SHORT).show();
@@ -216,6 +227,11 @@ public class ProfileSetupActivity extends AppCompatActivity {
                 {
                     if(dataSnapshot.hasChild("profileImage")) {
 
+                        String url = dataSnapshot.child("profileImage").getValue().toString();
+                        String url2 = url.replaceAll("gs://petspace-2c47c.appspot.com/", "");
+                        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+                        StorageReference storageReference = firebaseStorage.getReference();
+                        StorageReference reference = storageReference.child(url2);
 
                         String image = dataSnapshot.child("profileImage").getValue().toString();
                         Picasso.get()
