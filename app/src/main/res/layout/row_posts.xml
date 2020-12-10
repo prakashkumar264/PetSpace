@@ -105,6 +105,14 @@
                 android:background="@null"
                 android:layout_weight="1"
                 android:text="Comment" />
+            <Button
+                android:id="@+id/share_post"
+                android:layout_marginLeft="20dp"
+                android:text="Share"
+                android:layout_weight="1"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
