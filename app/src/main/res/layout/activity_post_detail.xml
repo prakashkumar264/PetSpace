@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostDetailActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_above="@+id/rlcomments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:contentPadding="5dp"
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/profileLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/uPictureTv"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher_background"
+                            android:maxWidth="50dp"
+                            android:maxHeight="50dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+                            <TextView
+                                android:id="@+id/uNameTv"
+                                android:text="Name"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/uTimeTv"
+                                android:text="33min"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/pContentTv"
+                        android:text="The description of post"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/pImageTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@color/teal_200"
+                        />
+                    <TextView
+                        android:id="@+id/pLikesTv"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:textSize="12sp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/pCommentsTv"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:textSize="12sp"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F5F0F0" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        >
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comments"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:drawableStart="@drawable/comment"
+                android:drawablePadding="10dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlcomments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/comment_data"
+            android:layout_toStartOf="@+id/post_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter comment"
+            android:layout_margin="1dp">
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/post_comment"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/posting"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>

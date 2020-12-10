@@ -2,6 +2,7 @@ package edu.neu.madcourse.petspace.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ import java.util.List;
 import java.util.Locale;
 
 import edu.neu.madcourse.petspace.MainActivity;
+import edu.neu.madcourse.petspace.PostDetailActivity;
 import edu.neu.madcourse.petspace.ProfileSetupActivity;
 import edu.neu.madcourse.petspace.R;
 import edu.neu.madcourse.petspace.data.model.ModelPost;
@@ -75,6 +77,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         String pimage = postList.get(i).getPimage();
         String  pLikes = postList.get(i).getpLikes();
         String pId = postList.get(i).getPtime();
+        String pcomments = postList.get(i).getpComments();
 
         Calendar calendar  = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(ptimestamp));
@@ -116,6 +119,10 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             pLikes = "0";
         }
         holder.pLikesTv.setText(pLikes + " Likes");
+        if(pcomments == null){
+            pcomments = "0";
+        }
+        holder.pCommentTV.setText(pcomments + " Comments");
         setLikes(holder, pId);
         if(pimage.equals("noImage")){
             holder.pImageTv.setVisibility(View.GONE);
@@ -162,7 +169,9 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Commented", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, PostDetailActivity.class);
+                intent.putExtra("postid", pId);
+                context.startActivity(intent);
             }
         });
 
@@ -195,7 +204,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     static class MyHolder extends RecyclerView.ViewHolder{
 
         ImageView uPictureTv, pImageTv;
-        TextView uNameTv, uTimeTv, pContentTv, pLikesTv;
+        TextView uNameTv, uTimeTv, pContentTv, pLikesTv, pCommentTV;
         Button likebtn, commentbtn;
 
 
@@ -210,6 +219,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             pLikesTv = itemView.findViewById(R.id.pLikesTv);
             likebtn = itemView.findViewById(R.id.likebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn);
+            pCommentTV = itemView.findViewById(R.id.pCommentsTv);
 
         }
     }

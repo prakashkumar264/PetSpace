@@ -286,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
                                 hashMap.put("ptime", timestamp );
                                 hashMap.put("pId", timestamp);
                                 hashMap.put("pLikes", "0");
+                                hashMap.put("pComments", "0");
 
                                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
                                 reference.child(timestamp).setValue(hashMap)
@@ -323,6 +324,7 @@ public class MainActivity extends AppCompatActivity {
             hashMap.put("ptime", timestamp );
             hashMap.put("pId", timestamp);
             hashMap.put("pLikes", "0");
+            hashMap.put("pComments", "0");
             DatabaseReference reference = PostRef;
             reference.child(timestamp).setValue(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
