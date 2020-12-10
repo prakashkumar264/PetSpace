@@ -65,7 +65,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
         String display_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         String usernameRef = display_name.toString();
 
-            ValueEventListener eventListener = new ValueEventListener() {
+        ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -214,29 +214,29 @@ class MemberData {
                 '}';
     }
 }
-    class PostViewHolder extends RecyclerView.ViewHolder {
+class PostViewHolder extends RecyclerView.ViewHolder {
 
-        View mView;
-        DatabaseReference LikesRef, FavoritesRef, PostRef;
-        ImageView Like;
-        ImageView Favorite;
-        TextView Date, Time;
+    View mView;
+    DatabaseReference LikesRef, FavoritesRef, PostRef;
+    ImageView Like;
+    ImageView Favorite;
+    TextView Date, Time;
 
-        public PostViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
+    public PostViewHolder(View itemView) {
+        super(itemView);
+        mView = itemView;
 
-            //Instantiating Like,Comment,Share widgets
-            Like = mView.findViewById(R.id.post_like);
-            Favorite = mView.findViewById(R.id.post_favorite);
-            Date = mView.findViewById(R.id.post_date);
-            Time = mView.findViewById(R.id.post_time);
+        //Instantiating Like,Comment,Share widgets
+        Like = mView.findViewById(R.id.post_like);
+        Favorite = mView.findViewById(R.id.post_favorite);
+        Date = mView.findViewById(R.id.post_date);
+        Time = mView.findViewById(R.id.post_time);
 
-            PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
-            LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
-            FavoritesRef = FirebaseDatabase.getInstance().getReference().child("Favorites");
+        PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+        FavoritesRef = FirebaseDatabase.getInstance().getReference().child("Favorites");
 
-        }
+    }
 
 
 }
