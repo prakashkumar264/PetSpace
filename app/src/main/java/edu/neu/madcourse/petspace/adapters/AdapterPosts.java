@@ -3,6 +3,8 @@ package edu.neu.madcourse.petspace.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -33,6 +36,8 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -174,7 +179,55 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 context.startActivity(intent);
             }
         });
+        holder.sharebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.pImageTv.getDrawable();
+                if(bitmapDrawable == null){
+                    shareTextOnly(pcontent, holder.uNameTv.getText().toString());
+                }else{
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    shareTextImageOnly(pcontent, bitmap, holder.uNameTv.getText().toString());
+                }
+            }
+        });
 
+    }
+
+    private void shareTextImageOnly(String pcontent, Bitmap pimage, String name) {
+        Uri uri = saveImagetoShare(pimage);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
+        intent.putExtra(Intent.EXTRA_TEXT, name+" Posted on PetSpace : "+pcontent);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setType("image/png");
+        context.startActivity(Intent.createChooser(intent, "Share via"));
+    }
+
+    private Uri saveImagetoShare(Bitmap pimage) {
+        File imageFolder = new File(context.getCacheDir(), "images");
+        Uri uri = null;
+        try{
+            imageFolder.mkdirs();
+            File file = new File(imageFolder, "shared_image.png");
+            FileOutputStream stream = new FileOutputStream(file);
+            pimage.compress(Bitmap.CompressFormat.PNG, 90, stream);
+            stream.flush();
+            stream.close();
+            uri = FileProvider.getUriForFile(context, "edu.neu.madcourse.petspace", file);
+
+        }catch (Exception e){
+            Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return  uri;
+    }
+
+    private void shareTextOnly(String pcontent, String name) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
+        intent.putExtra(Intent.EXTRA_TEXT, name+" Posted on PetSpace : "+pcontent);
+        context.startActivity(Intent.createChooser(intent, "Share via"));
     }
 
     private void setLikes(final MyHolder holder,final String pId) {
@@ -205,7 +258,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
         ImageView uPictureTv, pImageTv;
         TextView uNameTv, uTimeTv, pContentTv, pLikesTv, pCommentTV;
-        Button likebtn, commentbtn;
+        Button likebtn, commentbtn, sharebtn;
 
 
         public MyHolder(@NonNull View itemView) {
@@ -220,6 +273,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             likebtn = itemView.findViewById(R.id.likebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn);
             pCommentTV = itemView.findViewById(R.id.pCommentsTv);
+            sharebtn = itemView.findViewById(R.id.share_post);
 
         }
     }
