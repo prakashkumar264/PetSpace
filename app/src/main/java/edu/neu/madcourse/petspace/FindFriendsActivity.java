@@ -18,14 +18,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -54,7 +57,6 @@ public class FindFriendsActivity extends AppCompatActivity {
         SearchList = findViewById(R.id.find_friends_list);
         SearchList.setHasFixedSize(true);
         SearchList.setLayoutManager(new LinearLayoutManager(this));
-
         SearchInputText = findViewById(R.id.search_friends_text);
         Back = findViewById(R.id.back_button);
         SearchFriendsButton = findViewById(R.id.search_friends_button);
@@ -67,10 +69,10 @@ public class FindFriendsActivity extends AppCompatActivity {
 
                 String searchBoxInput =SearchInputText.getText().toString();
 
-//                // Hide Keyboard
-//                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-//                        InputMethodManager.HIDE_NOT_ALWAYS);
+                // Hide Keyboard
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
                 SearchFriends(searchBoxInput);
 
             }
@@ -100,7 +102,7 @@ public class FindFriendsActivity extends AppCompatActivity {
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(FindFriendsActivity.this,"Open Profile",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FindFriendsActivity.this,"Opening " + model.username + "`s Profile",Toast.LENGTH_SHORT).show();
                         SendUserToProfileActivity(UserKey);
 
                     }
@@ -124,7 +126,7 @@ public class FindFriendsActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.startListening();
     }
 
-    public static class FindFriendsViewHolder extends RecyclerView.ViewHolder
+    public class FindFriendsViewHolder extends RecyclerView.ViewHolder
     {
         View mView;
 
@@ -142,7 +144,20 @@ public class FindFriendsActivity extends AppCompatActivity {
         public void setProfileImage(String profileImage)
         {
             CircleImageView imageView = mView.findViewById(R.id.profile_image);
-            Picasso.get().load(profileImage).placeholder(R.drawable.profile).into(imageView);
+
+//            Picasso.get().load(profileImage).placeholder(R.drawable.profile).into(imageView);
+
+
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.placeholder(R.drawable.petspace_icons);
+            requestOptions.error(R.drawable.petspace_icons);
+
+            Glide
+                    .with(FindFriendsActivity.this)
+                    .setDefaultRequestOptions(requestOptions)
+                    .load(profileImage)
+                    .into(imageView);
+
         }
         public void setUsername(String username)
         {

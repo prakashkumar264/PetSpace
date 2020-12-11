@@ -95,7 +95,7 @@
                                     android:id="@+id/profile_posts_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/posts"
+                                    android:text="5"
                                     android:textColor="@android:color/darker_gray" />
 
                             </LinearLayout>
@@ -121,7 +121,7 @@
                                     android:id="@+id/profile_likes_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/profile_likes"
+                                    android:text="3"
                                     android:textColor="@android:color/darker_gray" />
 
                             </LinearLayout>
@@ -146,7 +146,7 @@
                                     android:id="@+id/profile_comment_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/comments_profile"
+                                    android:text="2"
                                     android:textColor="@android:color/darker_gray" />
 
                             </LinearLayout>

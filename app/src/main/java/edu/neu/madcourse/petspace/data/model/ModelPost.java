@@ -1,7 +1,8 @@
 package edu.neu.madcourse.petspace.data.model;
 
 public class ModelPost {
-    String pid,uid,pcontent,pimage, ptime, pLikes, pComments;
+    public String pimage;
+    String pid,uid,pcontent, ptime, pLikes, pComments;
 
     public ModelPost(){
 

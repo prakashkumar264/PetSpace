@@ -5,34 +5,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
+import edu.neu.madcourse.petspace.adapters.AdapterPosts;
+import edu.neu.madcourse.petspace.data.model.ModelPost;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -41,33 +43,27 @@ public class ProfileActivity extends AppCompatActivity {
     private String CurrentUserId, DatabaseUserId;
     private CircleImageView profileImage;
     private TextView profile_username, profile_fullname, profile_bio;
-    private String user_posts, user_followers, user_following;
+    private String user_posts;
     private RecyclerView profile_posts_recyclerview;
-    private TextView followuser;
-    private String CURRENT_STATE;
-    private DatabaseReference FriendRequestReference, FollowerReference, FollowerReferenceCurrent;
-    private EditText profile_username_edit, profile_fullname_edit, profile_bio_edit;
-    private ImageButton user_profile_image_button;
-    private FirebaseRecyclerAdapter<UserPosts, UserPostsHolder> firebaseRecyclerAdapter;
-    //private ImageView going_back;
+    private FirebaseRecyclerAdapter<ModelPost, ModelPostHolder> firebaseRecyclerAdapter;
     private static Bundle mBundleRecyclerViewState;
+    private RecyclerView recyclerView;
+    private List<ModelPost> modelPosts;
+    private AdapterPosts adapterPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        final String UserKey = getIntent().getExtras().getString("UserKey");
+        Context context;
+        List<ModelPost> postList;
 
+        final String UserKey = getIntent().getExtras().getString("UserKey");
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
-        PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
-        FriendRequestReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("FriendRequests");
-        FollowerReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("Followers");
-        FollowerReferenceCurrent = FirebaseDatabase.getInstance().getReference().child("Users").child(CurrentUserId).child("Followers");
-
         profileImage = findViewById(R.id.profile_image);
         profile_username = findViewById(R.id.profile_username);
         profile_fullname = findViewById(R.id.profile_fullname);
@@ -85,8 +81,21 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     if (dataSnapshot.hasChild("profileImage")) {
-                        String profileimage = dataSnapshot.child("profileImage").getValue().toString();
-                        Picasso.get().load(profileimage).placeholder(R.drawable.profile).into(profileImage);
+
+                        String profile_image = dataSnapshot.child("profileImage").getValue().toString();
+
+//                        Picasso.get().load(profile_image).placeholder(R.drawable.profile).into(profileImage);
+
+                        RequestOptions requestOptions = new RequestOptions();
+                        requestOptions.placeholder(R.drawable.petspace_icons);
+                        requestOptions.error(R.drawable.petspace_icons);
+
+                        Glide
+                                .with(ProfileActivity.this)
+                                .setDefaultRequestOptions(requestOptions)
+                                .load(profile_image)
+                                .into(profileImage);
+
                     }
 
                     if (dataSnapshot.hasChild("fullname")) {
@@ -107,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 } else {
-                    Toast.makeText(ProfileActivity.this, "Please Check your Internet Connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileActivity.this, "Error: Check connection!", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -123,17 +132,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void DispalyUserPostGrid(final String userKey)
     {
-        FirebaseRecyclerOptions<UserPosts> options = new FirebaseRecyclerOptions.Builder<UserPosts>()
-                .setQuery(PostRef.orderByChild("uid").equalTo(userKey),UserPosts.class)
+        FirebaseRecyclerOptions<ModelPost> options = new FirebaseRecyclerOptions.Builder<ModelPost>()
+                .setQuery(PostRef.orderByChild("uid").equalTo(userKey),ModelPost.class)
                 .build();
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserPosts,UserPostsHolder>(options) {
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ModelPost,ModelPostHolder>(options) {
 
             @Override
-            protected void onBindViewHolder(@NonNull UserPostsHolder holder, int position, @NonNull UserPosts model) {
+            protected void onBindViewHolder(@NonNull ModelPostHolder holder, int position, @NonNull ModelPost model) {
 
                 final String PostKey = getRef(position).getKey();
-                
-                holder.setPostImage(model.postimage);
+
+                holder.setPostImage(model.pimage);
 
                 holder.mView.findViewById(R.id.user_post_image).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -148,22 +157,22 @@ public class ProfileActivity extends AppCompatActivity {
 
             @NonNull
             @Override
-            public UserPostsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public ModelPostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.post_bar_layout, parent, false);
-                return new UserPostsHolder(view);
+                        .inflate(R.layout.all_user_post_layout, parent, false);
+                return new ModelPostHolder(view);
             }
         };
 
         profile_posts_recyclerview.setAdapter(firebaseRecyclerAdapter);
     }
 
-    public static class UserPostsHolder extends RecyclerView.ViewHolder {
+    public static class ModelPostHolder extends RecyclerView.ViewHolder {
         View mView;
         ImageView UserPostImage;
 
-        public UserPostsHolder(View itemView) {
+        public ModelPostHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
@@ -173,6 +182,7 @@ public class ProfileActivity extends AppCompatActivity {
             UserPostImage = itemView.findViewById(R.id.user_post_image);
 
             Picasso.get().load(postImage).into(UserPostImage);
+
         }
     }
 
