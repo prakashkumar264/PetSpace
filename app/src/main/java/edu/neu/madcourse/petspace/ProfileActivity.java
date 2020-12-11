@@ -59,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         profile_bio = findViewById(R.id.profile_bio);
         followuser = findViewById(R.id.user_total_followers);
 
-        profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
+        profile_posts_recyclerview = findViewById(R.id.profile_posts_rec);
         profile_posts_recyclerview.setHasFixedSize(true);
         profile_posts_recyclerview.setItemViewCacheSize(20);
         profile_posts_recyclerview.setDrawingCacheEnabled(true);
@@ -81,6 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 EditText user_name = (EditText) findViewById(R.id.user_name);
                 user_name.setText(dataSnapshot.child("username").getValue(String.class));
 
@@ -98,7 +99,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                 EditText profile_bio = (EditText) findViewById(R.id.profile_bio);
                 profile_bio.setText(dataSnapshot.child("profilebio").getValue(String.class));
-
 
             }
 

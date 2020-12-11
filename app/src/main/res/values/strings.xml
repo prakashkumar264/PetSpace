@@ -223,4 +223,9 @@
     <string name="Nearby">Nearby</string>
     <string name="google_map_key">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
     <string name="find">Find</string>
+    <string name="likes">Likes</string>
+    <string name="comments">Comments</string>
+    <string name="your_user_name">your @ user_name</string>
+    <string name="comments_profile">comments</string>
+    <string name="profile_likes">Profile Likes</string>
 </resources>

@@ -136,17 +136,17 @@ public class FindFriendsActivity extends AppCompatActivity {
 
         public void setFullname(String fullname)
         {
-            TextView name = mView.findViewById(R.id.full_name);
+            TextView name = mView.findViewById(R.id.profile_fullname);
             name.setText(fullname);
         }
         public void setProfileImage(String profileImage)
         {
-            CircleImageView imageView = mView.findViewById(R.id.post_profile_img);
+            CircleImageView imageView = mView.findViewById(R.id.profile_image);
             Picasso.get().load(profileImage).placeholder(R.drawable.profile).into(imageView);
         }
         public void setUsername(String username)
         {
-            TextView name = mView.findViewById(R.id.user_name);
+            TextView name = mView.findViewById(R.id.profile_username);
             name.setText(username);
 
         }
