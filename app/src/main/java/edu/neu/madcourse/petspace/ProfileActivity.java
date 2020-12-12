@@ -40,16 +40,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference UserRef, PostRef;
-    private String CurrentUserId, DatabaseUserId;
+    private String CurrentUserId;
     private CircleImageView profileImage;
     private TextView profile_username, profile_fullname, profile_bio;
-    private String user_posts;
     private RecyclerView profile_posts_recyclerview;
     private FirebaseRecyclerAdapter<ModelPost, ModelPostHolder> firebaseRecyclerAdapter;
     private static Bundle mBundleRecyclerViewState;
-    private RecyclerView recyclerView;
-    private List<ModelPost> modelPosts;
-    private AdapterPosts adapterPosts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
