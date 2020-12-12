@@ -221,11 +221,17 @@
     <string name="_12_00">12:00</string>
     <string name="_05_december_2020">05-December-2020</string>
     <string name="Nearby">Nearby</string>
-    <string name="google_map_key">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
+    <string name="google_map_key">AIzaSyDqvCg3XwtE0pTv1OoxxnxXZvB2HRm-F-s</string>
     <string name="find">Find</string>
     <string name="likes">Likes</string>
     <string name="comments">Comments</string>
     <string name="your_user_name">your @ user_name</string>
     <string name="comments_profile">comments</string>
     <string name="profile_likes">Profile Likes</string>
+    <string name="like_post_btn">Like</string>
+    <string name="the_description_of_post">The description of post</string>
+    <string name="comment">Comment</string>
+    <string name="name">Name</string>
+    <string name="_33min">33min</string>
+    <string name="share">Share</string>
 </resources>
