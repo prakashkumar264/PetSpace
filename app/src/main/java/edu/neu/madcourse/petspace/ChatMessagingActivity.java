@@ -76,7 +76,7 @@ public class ChatMessagingActivity extends AppCompatActivity implements RoomList
             }
         };
 
-        MemberData data = new MemberData(usernameRef, getRandomColor());
+        MemberData data = new MemberData(getRandomName(), getRandomColor());
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {
             @Override
