@@ -55,10 +55,10 @@ import java.util.List;
 /**
  * An activity that displays a map showing the place at the device's current location.
  */
-public class MapsMarkerActivity extends AppCompatActivity {
+public class MapsNearbyActivity extends AppCompatActivity {
     //Initialize varible
     Spinner spType;
-    View btFind;
+    Button btFind;
     SupportMapFragment supportMapFragment;
     GoogleMap map;
 
@@ -68,11 +68,14 @@ public class MapsMarkerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_mapsnearby);
 
         //Assign variable
         spType = findViewById(R.id.sp_type);
+
         btFind = findViewById(R.id.bt_find);
+
+
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
 
         //Initialize array of place type
@@ -81,14 +84,14 @@ public class MapsMarkerActivity extends AppCompatActivity {
         String[] placeNameList = {"Vet Clinic", "Pet Store", "Pet Restaurant", "Public Park"};
 
         //Set adapter on spinner
-        spType.setAdapter(new ArrayAdapter<>(MapsMarkerActivity.this,
+        spType.setAdapter(new ArrayAdapter<>(MapsNearbyActivity.this,
                 android.R.layout.simple_spinner_dropdown_item, placeNameList));
 
         //Initialize fused Location provider client
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         //Check permission
-        if (ActivityCompat.checkSelfPermission(MapsMarkerActivity.this,
+        if (ActivityCompat.checkSelfPermission(MapsNearbyActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             //When permission granted
             //Call method
@@ -96,7 +99,7 @@ public class MapsMarkerActivity extends AppCompatActivity {
         } else{
             //When permission denied
             //Request permission
-            ActivityCompat.requestPermissions(MapsMarkerActivity.this,
+            ActivityCompat.requestPermissions(MapsNearbyActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
 
         }
@@ -138,7 +141,7 @@ public class MapsMarkerActivity extends AppCompatActivity {
         }else{
             //When permission denied
             //Request permission
-            ActivityCompat.requestPermissions(MapsMarkerActivity.this,
+            ActivityCompat.requestPermissions(MapsNearbyActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
@@ -285,7 +288,7 @@ public class MapsMarkerActivity extends AppCompatActivity {
      */
     public void onClickCancel(View view) {
         //Sending User back to MainActivity.
-        Intent loginIntent = new Intent(MapsMarkerActivity.this, MainActivity.class);
+        Intent loginIntent = new Intent(MapsNearbyActivity.this, MainActivity.class);
         startActivity(loginIntent);
     }
 

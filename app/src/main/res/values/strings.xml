@@ -70,7 +70,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="about_petspace">About PetSpace</string>
     <string name="return_to_home">Return to Home</string>
-    <string name="sign_up_for_a_new_petspace_account">Sign Up for A New PetSpace Account</string>
+    <string name="sign_up_for_a_new_petspace_account">Sign Up for A` New PetSpace Account</string>
     <string name="Friend_Requests">Friend Requests</string>
     <string name="notifications">Notifications</string>
     <string name="enter_user_display_name">Enter Your User Display Name</string>
@@ -234,4 +234,29 @@
     <string name="name">Name</string>
     <string name="_33min">33min</string>
     <string name="share">Share</string>
+    <string name="action_geolocate">Pick Place</string>
+
+
+    <string-array name="place_type">
+        <item>Pet Stores</item>
+        <item>Pet Shelters</item>
+        <item>Pet Food</item>
+        <item>Pet Parks</item>
+    </string-array>
+
+    <string-array name="place_type_name">
+        <item></item>
+        <item>Pet Stores</item>
+        <item>Pet Shelters</item>
+        <item>Pet Food</item>
+        <item>Pet Parks</item>
+    </string-array>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="str_btn_find">Find</string>
+    <string name="bt_find" type="id">bt_find</string>
+    <string name="sp_type" type="id">sp_type</string>
+    <string name="google_map" type="id">google_map</string>
+    <string name="HomeButton" type="id">HomeButton</string>
+    <string name="title_activity_maps2">Map</string>
 </resources>

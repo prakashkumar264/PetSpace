@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/purple_500"
     app:cardCornerRadius="2dp"
-    app:cardElevation="2dp"
-    tools:context=".Chat_msg">
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:id="@+id/post_column"
@@ -79,16 +78,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
-                android:padding="10dp">
-
-                <ImageButton
-                    android:id="@+id/popup_button"
-                    android:layout_width="20dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/post_back"
-                    android:backgroundTint="#FFFFFF"
-                    android:scaleType="fitCenter" />
-            </LinearLayout>
+                android:padding="10dp"/>
         </LinearLayout>
 
         <TextView
@@ -134,24 +124,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/post_favorite"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:padding="5dp"
-                    android:src="@drawable/post_heart_empty" />
-
-                <ImageView
-                    android:id="@+id/post_like"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="13dp"
-                    android:padding="5dp"
-                    android:src="@drawable/like" />
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
 
         </LinearLayout>
@@ -162,30 +135,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
             android:orientation="horizontal"
-            android:padding="2dp">
-
-
-            <TextView
-                android:id="@+id/post_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:inputType="date"
-                android:text="@string/_05_december_2020"
-                android:textColor="@color/white"
-                android:textSize="9sp" />
-
-            <TextView
-                android:id="@+id/post_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:inputType="time"
-                android:text="@string/_12_00"
-
-                android:textColor="@color/white"
-                android:textSize="9sp" />
-        </LinearLayout>
+            android:padding="2dp"/>
     </LinearLayout>
 
     <TableRow

@@ -227,10 +227,10 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         mView = itemView;
 
         //Instantiating Like,Comment,Share widgets
-        Like = mView.findViewById(R.id.post_like);
-        Favorite = mView.findViewById(R.id.post_favorite);
-        Date = mView.findViewById(R.id.post_date);
-        Time = mView.findViewById(R.id.post_time);
+//        Like = mView.findViewById(R.id.post_like);
+//        Favorite = mView.findViewById(R.id.post_favorite);
+//        Date = mView.findViewById(R.id.post_date);
+//        Time = mView.findViewById(R.id.post_time);
 
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
