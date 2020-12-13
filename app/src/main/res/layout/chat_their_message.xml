@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="10dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="60dp"
+    android:paddingStart="15dp"
+    android:paddingEnd="60dp"
     android:clipToPadding="false">
 
     <ImageView
@@ -17,25 +17,26 @@
 
     <TextView
         android:id="@+id/post_user_name"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/post_image"
-        android:layout_alignTop="@+id/post_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/post_image"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/post_image"
         android:paddingBottom="4dp"
-        android:text="Rose"/>
+        android:text="@string/rose" />
 
     <TextView
+        android:id="@+id/message_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/message_body"
         android:layout_below="@+id/post_user_name"
-        android:layout_alignLeft="@+id/post_user_name"
+        android:layout_alignStart="@+id/post_user_name"
+        android:layout_alignParentStart="true"
         android:background="@drawable/their_message"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="16dp"
         android:elevation="2dp"
-        android:textSize="18dp"
-        android:text="How are you doing? This is a long message that should probably wrap."
-        />
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:text="@string/how_are_you_doing_this_is_a_long_message_that_should_probably_wrap"
+        android:textSize="18sp" />
 </RelativeLayout>
