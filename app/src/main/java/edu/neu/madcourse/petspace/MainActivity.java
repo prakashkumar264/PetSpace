@@ -616,7 +616,7 @@ public class MainActivity extends AppCompatActivity {
     //Method to redirect User to MessagingActivity.
     private void SendUserToMapsMarkerActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, MapsMarkerActivity.class);
+        Intent forgotIntent =new Intent(MainActivity.this, MapsNearbyActivity.class);
         forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(forgotIntent);
         finish();
