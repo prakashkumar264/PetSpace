@@ -58,7 +58,7 @@ import java.util.List;
 public class MapsNearbyActivity extends AppCompatActivity {
     //Initialize varible
     Spinner spType;
-    Button btFind;
+    View btFind;
     SupportMapFragment supportMapFragment;
     GoogleMap map;
 
@@ -73,7 +73,7 @@ public class MapsNearbyActivity extends AppCompatActivity {
         //Assign variable
         spType = findViewById(R.id.sp_type);
 
-
+        btFind = findViewById(R.id.bt_find);
 
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
@@ -104,7 +104,24 @@ public class MapsNearbyActivity extends AppCompatActivity {
 
         }
 
+        btFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Get selected position of spinner
+                int i = spType.getSelectedItemPosition();
+                //Initialize url
+                String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" //url
+                        + "?location=" + currentLat + "," + currentLong //Location latitude and logitude
+                        + "&radius=5000" //Nearby radius
+                        + "&types=" + placeTypeList[i] //Place type
+                        + "&sensor=true" //Sensor
+                        + "AIzaSyDqvCg3XwtE0pTv1OoxxnxXZvB2HRm-F-s"; //Google map key
 
+                //Execute place task method to download json date
+                new PlaceTask().execute(url);
+
+            }
+        });
 
 
 
@@ -137,19 +154,17 @@ public class MapsNearbyActivity extends AppCompatActivity {
                     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
-//                            //when map is ready
-//                            map = googleMap;
-//                            //Zoom current location on map
+                            //when map is ready
+                            map = googleMap;
+                            //Zoom current location on map
 //                            map.animateCamera((CameraUpdateFactory.newLatLngZoom(new LatLng(currentLat, currentLong), 10)));
 
-                            map = googleMap;
-
-                            // Add a marker in Sydney and move the camera
-                            LatLng sydney = new LatLng(-34, 151);
+                            LatLng seattle = new LatLng(122.3321, 47.6062);
                             map.addMarker(new MarkerOptions()
-                                    .position(sydney)
-                                    .title("Marker in Sydney"));
-                            map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                                    .position(seattle)
+                                    .title("Marker in Seattle"));
+                            map.moveCamera(CameraUpdateFactory.newLatLng(seattle));
+
                         }
                     });
                 }
@@ -279,28 +294,14 @@ public class MapsNearbyActivity extends AppCompatActivity {
         startActivity(loginIntent);
     }
 
+
     public void onClickFind(View view) {
-        //Get selected position of spinner
 
-        //Initialize array of place type
-        String[] placeTypeList = {"vet_clinic", "pet_store", "pet_restaurant", "public_park"};
-        //Initialize array of place name
-        String[] placeNameList = {"Vet Clinic", "Pet Store", "Pet Restaurant", "Public Park"};
-
-        int i = spType.getSelectedItemPosition();
-        //Initialize url
-        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" //url
-                + "?location=" + currentLat + "," + currentLong //Location latitude and logitude
-                + "&radius=5000" //Nearby radius
-                + "&types=" + placeTypeList[i] //Place type
-                + "&sensor=true" //Sensor
-                + "&key" + getResources().getString(R.string.google_map_key); //Google map key
-
-        //Execute place task method to download json date
-        new PlaceTask().execute(url);
-
-
+        LatLng seattle = new LatLng(47.612150, -122.344750);
+        map.addMarker(new MarkerOptions()
+                .position(seattle)
+                .title("Mud Bay"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(seattle));
 
     }
-
 }
