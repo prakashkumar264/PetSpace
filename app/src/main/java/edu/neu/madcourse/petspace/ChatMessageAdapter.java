@@ -60,7 +60,7 @@ public class ChatMessageAdapter extends BaseAdapter {
 
 
         } else {
-            convertView = messageInflater.inflate(R.layout.chat_their_message, null);
+            convertView = messageInflater.inflate(R.layout.chat_my_message, null);
             holder.avatar = (View) convertView.findViewById(R.id.post_profile_img);
             holder.name = (TextView) convertView.findViewById(R.id.post_user_name);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
