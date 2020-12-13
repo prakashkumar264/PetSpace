@@ -48,19 +48,15 @@ public class ChatMessageAdapter extends BaseAdapter {
         LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         ChatMessage message = messages.get(i);
 
-        if (message.isBelongsToCurrentUser()) {
+        if (message.isBelongsToCurrentUser()) { // this message was sent by us so let's create a basic chat bubble on the right
             convertView = messageInflater.inflate(R.layout.chat_my_message, null);
-            holder.avatar = (View) convertView.findViewById(R.id.post_profile_img);
-            holder.name = (TextView) convertView.findViewById(R.id.post_user_name);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
-
-            holder.name.setText(message.getMemberData().getName());
             holder.messageBody.setText(message.getText());
 
 
         } else {
-            convertView = messageInflater.inflate(R.layout.chat_my_message, null);
+            convertView = messageInflater.inflate(R.layout.chat_their_message, null);
             holder.avatar = (View) convertView.findViewById(R.id.post_profile_img);
             holder.name = (TextView) convertView.findViewById(R.id.post_user_name);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
