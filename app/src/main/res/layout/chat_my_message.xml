@@ -7,6 +7,24 @@
     android:paddingLeft="60dp"
     android:clipToPadding="false">
 
+    <ImageView
+        android:id="@+id/avatarIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="430dp"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/post_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/avatarIv"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/avatarIv"
+        android:paddingBottom="4dp"
+        android:text="@string/rose" />
     <TextView
         android:id="@+id/message_body"
         android:layout_width="wrap_content"

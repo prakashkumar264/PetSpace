@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this, "Notifications", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Notifications coming in Version 2.0!", Toast.LENGTH_SHORT).show();
 
                 // test code
                 // change notifications image - alert that notifications are pending
@@ -471,13 +471,13 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.Friend_Requests:
 
-                SendUserToFriendRequestsActivity();
+                Toast.makeText(MainActivity.this, "Coming in Version 2.0!", Toast.LENGTH_SHORT).show();
 
                 break;
 
             case R.id.Notifications:
 
-                SendUserToNotificationsActivity();
+                Toast.makeText(MainActivity.this, "Coming in Version 2.0!", Toast.LENGTH_SHORT).show();
 
                 break;
 
