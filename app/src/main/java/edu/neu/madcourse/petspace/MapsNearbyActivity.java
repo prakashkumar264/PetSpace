@@ -193,7 +193,7 @@ public class MapsNearbyActivity extends AppCompatActivity {
 
             try {
                 //Initialize data
-                data = downloadUrl(strings[0]);
+                data = downloadUrl(strings[1]);
             } catch (IOException e) {
                 e.printStackTrace();
             }

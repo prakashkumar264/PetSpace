@@ -59,7 +59,7 @@ public class ChatMessagingActivity_dogs extends AppCompatActivity implements Roo
         Users_Ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String display_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        String usernameRef = display_name.toString();
+
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
